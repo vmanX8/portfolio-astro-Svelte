@@ -6,14 +6,14 @@ export type Locale = "en" | "gr";
 export const messages = {
   en: {
     seo: {
-      homeTitle: "Vangelis Manouhos - Portfolio",
+      homeTitle: "My Portfolio",
       homeDescription:
         "Welcome to my portfolio built with Astro, Svelte, and Tailwind. Fast, responsive, and SEO-friendly.",
-      aboutTitle: "About - Vangelis Manouhos",
+      aboutTitle: "About me",
       aboutDescription: "About page (coming soon).",
-      projectsTitle: "Projects - Vangelis Manouhos",
+      projectsTitle: "My Projects",
       projectsDescription: "Projects page (coming soon).",
-      contactTitle: "Contact - Vangelis Manouhos",
+      contactTitle: "Contact",
       contactDescription: "Contact page (coming soon).",
     },
     nav: {
@@ -40,20 +40,31 @@ export const messages = {
       projects: "Projects",
       contact: "Contact",
     },
+
+		hero: {
+			badge: "Portfolio",
+			titleHi: "Hi, I'm",
+			name: "Vangelis",
+			role: "Frontend Engineer",
+			tagline:
+				"“Design is not decoration, it’s the way your website speaks before a single word is read.”",
+			ctaProjects: "See my work", 
+			ctaContact: "Let’s build something",
+		},
   },
   gr: {
 		seo: {
-			homeTitle: "Βαγγέλης Μανούχος – Portfolio",
+			homeTitle: "Το Portfolio μου",
 			homeDescription:
 				"Καλώς ήλθατε στο Portfolio μου. Σχεδιάστηκε με Astro + Svelte + Tailwind. Γρήγορο, responsive και φιλικό στο SEO.",
 
-			aboutTitle: "Σχετικά – Βαγγέλης Μανούχος",
+			aboutTitle: "Σχετικά με εμένα",
 			aboutDescription: "Σελίδα Σχετικά (σύντομα κοντά σας).",
 
-			projectsTitle: "Projects – Βαγγέλης Μανούχος",
+			projectsTitle: "Τα Projects μου",
 			projectsDescription: "Σελίδα Projects (σύντομα κοντά σας).",
 
-			contactTitle: "Επικοινωνία – Βαγγέλης Μανούχος",
+			contactTitle: "Επικοινωνία",
 			contactDescription: "Σελίδα Επικοινωνία (σύντομα κοντά σας).",
 		},
 		nav: {
@@ -81,6 +92,17 @@ export const messages = {
 			about: "Σχετικά",
 			projects: "Projects",
 			contact: "Επικοινωνία",
+		},
+
+    hero: {
+			badge: "Portfolio",
+			titleHi: "Γειά σας, με λένε",
+			name: "Βαγγέλη",
+			role: "Είμαι Προγραμματιστής Frontend",
+			tagline:
+				"«Το design χωρίς στρατηγική είναι διακόσμηση, είναι ο τρόπος που το site μας μιλά πριν διαβαστεί έστω μία λέξη.»",
+			ctaProjects: "Projects",
+			ctaContact: "Επικοινωνήστε μαζί μου",
 		},
   },
 } as const;

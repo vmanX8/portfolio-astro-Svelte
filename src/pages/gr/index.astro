@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import NavBar from "../../components/NavBar.svelte";
+import HeroSect from "../../components/sections/HeroSect.svelte";
 import { tSeo } from "../../lib/i18n/server";
 
 const lang = "gr";
@@ -9,10 +10,5 @@ const seo = tSeo(lang);
 
 <BaseLayout title={seo.homeTitle} description={seo.homeDescription} lang={lang}>
 	<NavBar client:load />
-	<section class="max-w-5xl mx-auto px-4 pt-28 md:pt-32 pb-16 space-y-4">
-		<h1 class="text-4xl md:text-5xl font-bold leading-tight">Καλώς ήρθες</h1>
-		<p class="text-slate-300 max-w-2xl">
-			Το περιεχόμενο της αρχικής σελίδας θα προστεθεί αργότερα.
-		</p>
-	</section>
+	<HeroSect client:load />
 </BaseLayout>
