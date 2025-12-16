@@ -1,15 +1,11 @@
 <script lang="ts">
   import { _ } from "svelte-i18n";
   import { setupI18n } from "../lib/i18n/i18n";
-  import { language, toLocalizedPath } from "../lib/languageStore";
 
   setupI18n();
   const t = _;
 
   export let pageKey: "about" | "projects" | "contact" = "about";
-
-  // Localized "back home" link
-  $: homeHref = toLocalizedPath("/", $language);
 </script>
 
 <section
@@ -23,8 +19,8 @@
       {$t("pages.notReady")}
     </p>
     <a
-      href={homeHref}
-      class="inline-block mt-2 text-[color:var(--accent)] hover:text-[color:var(--accent)]/80 transition-colors"
+      href="/"
+      class="inline-block mt-2 text-[color:var(--accent)] hover:text-[color:var(--accent-glow-hover)] hover:font-semibold transition-colors"
     >
       {$t("pages.backHome")}
     </a>

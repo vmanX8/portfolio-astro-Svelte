@@ -34,6 +34,17 @@ import { messages, type Locale } from "./messages";
  * The ?. (optional chaining) and ?? (nullish coalescing) operators
  * protect against errors if locale is invalid.
  *
+ * Usage in Astro pages:
+ * ```astro
+ * ---
+ * import { tSeo } from "../lib/i18n/server";
+ * const lang = Astro.currentLocale || "en";
+ * const seo = tSeo(lang);
+ * ---
+ * <title>{seo.homeTitle}</title>
+ * <meta name="description" content={seo.homeDescription} />
+ * ```
+ *
  * @param locale - The language to get translations for ("en" or "gr")
  * @returns The SEO translations object with title, description, etc.
  */
@@ -42,3 +53,4 @@ export function tSeo(locale: Locale) {
 	// If locale is invalid, fall back to English
 	return messages[locale]?.seo ?? messages.en.seo;
 }
+

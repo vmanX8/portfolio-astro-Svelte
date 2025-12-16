@@ -3,6 +3,21 @@
  *
  * This file sets up the svelte-i18n library for client-side translations.
  *
+ * What is i18n?
+ * - "i18n" stands for "internationalization" (18 letters between 'i' and 'n')
+ * - It's the process of making apps work in multiple languages
+ *
+ * How it works:
+ * 1. Detect language from URL (/ = English, /gr = Greek)
+ * 2. Load translation messages for that language
+ * 3. Initialize svelte-i18n with current language
+ * 4. Components can now use $t("key") to get translated text
+ *
+ * When to call setupI18n():
+ * - Every Svelte component that uses translations should call this
+ * - It's safe to call multiple times (only initializes once)
+ * - On subsequent calls, it just updates the language
+ *
  * Integration with Astro:
  * - Astro handles routing (/gr/ for Greek pages)
  * - This file detects language from URL
@@ -29,6 +44,17 @@ let initialized = false;
  * - Check if URL starts with /gr → Greek
  * - Otherwise → English (default)
  *
+ * Examples:
+ * - URL: "http://localhost:4321/" → "en"
+ * - URL: "http://localhost:4321/about" → "en"
+ * - URL: "http://localhost:4321/gr/" → "gr"
+ * - URL: "http://localhost:4321/gr/about" → "gr"
+ *
+ * Why check for 'window'?
+ * - This code runs both on server (during build) and client (in browser)
+ * - window.location only exists in browser
+ * - If on server, default to English
+ *
  * @returns The detected locale ("en" or "gr")
  */
 function getLocaleFromPath(): Locale {
@@ -48,6 +74,9 @@ function getLocaleFromPath(): Locale {
 /**
  * setupI18n - Initialize or update the i18n system
  *
+ * Call this in every component that uses translations.
+ * It's safe to call multiple times - it handles initialization correctly.
+ *
  * First time called:
  * 1. Loads translation messages (English and Greek)
  * 2. Initializes svelte-i18n
@@ -64,6 +93,18 @@ function getLocaleFromPath(): Locale {
  * - Components re-render and call setupI18n() again
  * - This function detects new language from URL and updates
  *
+ * Usage in components:
+ * ```svelte
+ * <script>
+ *   import { _ } from "svelte-i18n";
+ *   import { setupI18n } from "../lib/i18n/i18n";
+ *
+ *   setupI18n();
+ *   const t = _;
+ *
+ *   // Now you can use $t("key") in your template
+ * </script>
+ * ```
  */
 export function setupI18n() {
   // Step 1: Detect current language from URL

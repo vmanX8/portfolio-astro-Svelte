@@ -10,12 +10,13 @@
    * - Responsive design
    *
    * Key Features:
+   * - Uses Astro's View Transitions for smooth page navigation
    * - Mobile menu slides in from the right
    * - Keyboard support (ESC key closes menu)
    * - Accessible (ARIA attributes, semantic HTML)
    */
 
-  // Import the translation function and locale setter from svelte-i18n
+  // Import the translation function and locale store from svelte-i18n
   // _ is the translation function, we rename it to 't' for clarity
   import { _, locale } from "svelte-i18n";
 
@@ -25,11 +26,11 @@
   // Import the Locale type (either "en" or "gr")
   import type { Locale } from "../lib/i18n/messages";
 
-  // Import Svelte lifecycle hooks
-  import { onDestroy, onMount } from "svelte";
+  // Import Svelte lifecycle hook to clean up when component is destroyed
+  import { onDestroy } from "svelte";
 
-  // Locale persistence + link helpers
-  import { language, toLocalizedPath } from "../lib/languageStore";
+  // Import Astro's navigate function for smooth page transitions
+  import { navigate } from "astro:transitions/client";
 
   // Initialize i18n system - detects language from URL and sets up translations
   setupI18n();
@@ -41,13 +42,12 @@
   // Track whether the mobile menu is open or closed
   // This is a reactive variable - when it changes, the UI updates automatically
   let open = false;
+  let currentLocale: Locale = "en";
 
-  // Localized hrefs (reactively recomputed when locale changes)
-  $: currentLang = $language;
-  $: homeHref = toLocalizedPath("/", currentLang);
-  $: aboutHref = toLocalizedPath("/about", currentLang);
-  $: projectsHref = toLocalizedPath("/projects", currentLang);
-  $: contactHref = toLocalizedPath("/contact", currentLang);
+  // Keep local copy of the current locale so links stay in the active language
+  const unsubscribe = locale.subscribe((value) => {
+    currentLocale = (value as Locale) ?? "en";
+  });
 
   // === FUNCTIONS ===
 
@@ -57,7 +57,7 @@
    * How it works:
    * 1. Closes mobile menu if open
    * 2. Calculates the new URL with correct language prefix
-   * 3. Navigates to the localized URL
+   * 3. Uses Astro's navigate() to smoothly transition to new page
    *
    * Examples:
    * - If on "/about" and switch to Greek → navigate to "/gr/about"
@@ -69,10 +69,6 @@
     // Close mobile menu when language is selected
     open = false;
 
-    // Persist new locale to our store and svelte-i18n immediately
-    language.set(l);
-    locale.set(l);
-
     // Get the current URL path (e.g., "/about" or "/gr/projects")
     const currentPath = window.location.pathname;
 
@@ -80,13 +76,14 @@
     // Result: "/about" becomes "/about", "/gr/about" becomes "/about"
     const pathWithoutLocale = currentPath.replace(/^\/(en|gr)/, "") || "/";
 
-    // Build localized path
-    const newPath = toLocalizedPath(pathWithoutLocale, l);
+    // Add the new locale prefix
+    // English stays at root ("/about"), Greek gets /gr prefix ("/gr/about")
+    const newPath =
+      l === "en" ? pathWithoutLocale : `/${l}${pathWithoutLocale}`;
 
-    // Navigate to the new URL
-    if (newPath !== currentPath) {
-      window.location.href = newPath;
-    }
+    // Navigate to the new URL using Astro's View Transitions
+    // This provides a smooth fade animation instead of a hard page reload
+    navigate(newPath);
   }
 
   /**
@@ -122,6 +119,18 @@
     if (e.key === "Escape") close();
   }
 
+  /**
+   * localizedHref - build a link that preserves the current locale
+   *
+   * @param path - the base path (e.g., "/about")
+   * @returns the path prefixed with /gr when in Greek mode
+   */
+  function localizedHref(path: string) {
+    const prefix = currentLocale === "gr" ? "/gr" : "";
+    if (path === "/") return prefix || "/";
+    return `${prefix}${path}`;
+  }
+
   // Set up global keyboard listener (only on client-side)
   // We check for 'window' because this code also runs on the server during build
   if (typeof window !== "undefined") {
@@ -133,19 +142,17 @@
     onDestroy(() => window.removeEventListener("keydown", onKeyDown));
   }
 
-  // Sync svelte-i18n locale with the persisted language store on mount
-  onMount(() => {
-    const unsub = language.subscribe((value) => locale.set(value));
-    return () => unsub();
-  });
+  // Clean up the locale subscription when component is destroyed
+  onDestroy(unsubscribe);
 </script>
 
 <nav
   class="bg-[color:var(--surface)]/90 backdrop-blur fixed w-full z-10 top-0 shadow-md border-b border-white/10"
 >
   <div class="max-w-5xl mx-auto flex items-center justify-between px-4 py-4">
-    <a href={homeHref} class="text-white text-2xl font-semibold tracking-wide"
-      >Portfolio</a
+    <a
+      href={localizedHref("/")}
+      class="text-white text-2xl font-semibold tracking-wide">Portfolio</a
     >
 
     <!-- Desktop menu -->
@@ -153,28 +160,28 @@
       <ul class="flex items-center gap-8">
         <li>
           <a
-            href={homeHref}
+            href={localizedHref("/")}
             class="text-white hover:text-[color:var(--accent)] transition-colors duration-150"
             >{$t("nav.home")}</a
           >
         </li>
         <li>
           <a
-            href={aboutHref}
+            href={localizedHref("/about")}
             class="text-white hover:text-[color:var(--accent)] transition-colors duration-150"
             >{$t("nav.about")}</a
           >
         </li>
         <li>
           <a
-            href={projectsHref}
+            href={localizedHref("/projects")}
             class="text-white hover:text-[color:var(--accent)] transition-colors duration-150"
             >{$t("nav.projects")}</a
           >
         </li>
         <li>
           <a
-            href={contactHref}
+            href={localizedHref("/contact")}
             class="text-white hover:text-[color:var(--accent)] transition-colors duration-150"
             >{$t("nav.contact")}</a
           >
@@ -182,17 +189,17 @@
       </ul>
 
       <div class="flex items-center gap-2">
-        <span class="text-gray-300 text-sm">{$t("nav.language")}:</span>
+        <span class="text-gray-400 text-sm">{$t("nav.language")}:</span>
         <button
           type="button"
-          class="px-2 py-1 text-sm rounded border border-[color:var(--accent-weak)] text-white bg-white/5 hover:bg-[color:rgba(16,185,129,0.2)] shadow-[var(--accent-glow)] hover:shadow-[var(--accent-glow-hover)] transition-shadow duration-200"
+          class="px-2 py-1 text-sm rounded border border-[color:var(--accent-weak)] text-white bg-white/5 hover:bg-[color:var(--accent-glow-hover)] shadow-[var(--accent-glow)] hover:shadow-[var(--accent-glow-hover)] transition-shadow duration-200"
           on:click={() => setLang("en")}
         >
           EN
         </button>
         <button
           type="button"
-          class="px-2 py-1 text-sm rounded border border-[color:var(--accent-weak)] text-white bg-white/5 hover:bg-[color:rgba(16,185,129,0.2)] shadow-[var(--accent-glow)] hover:shadow-[var(--accent-glow-hover)] transition-shadow duration-200"
+          class="px-2 py-1 text-sm rounded border border-[color:var(--accent-weak)] text-white bg-white/5 hover:bg-[color:var(--accent-glow-hover)] shadow-[var(--accent-glow)] hover:shadow-[var(--accent-glow-hover)] transition-shadow duration-200"
           on:click={() => setLang("gr")}
         >
           GR
@@ -273,7 +280,7 @@
         <ul class="flex flex-col gap-2">
           <li>
             <a
-              href={homeHref}
+              href={localizedHref("/")}
               class="block rounded-lg px-3 py-2 text-white hover:bg-white/10"
               on:click={close}
             >
@@ -282,7 +289,7 @@
           </li>
           <li>
             <a
-              href={aboutHref}
+              href={localizedHref("/about")}
               class="block rounded-lg px-3 py-2 text-white hover:bg-white/10"
               on:click={close}
             >
@@ -291,7 +298,7 @@
           </li>
           <li>
             <a
-              href={projectsHref}
+              href={localizedHref("/projects")}
               class="block rounded-lg px-3 py-2 text-white hover:bg-white/10"
               on:click={close}
             >
@@ -300,7 +307,7 @@
           </li>
           <li>
             <a
-              href={contactHref}
+              href={localizedHref("/contact")}
               class="block rounded-lg px-3 py-2 text-white hover:bg-white/10"
               on:click={close}
             >
@@ -314,14 +321,14 @@
           <div class="flex gap-2">
             <button
               type="button"
-              class="flex-1 px-3 py-2 text-sm rounded border border-[color:var(--accent-weak)] text-white bg-white/5 hover:bg-[color:rgba(16,185,129,0.2)] shadow-[var(--accent-glow)] hover:shadow-[var(--accent-glow-hover)] transition-shadow duration-200"
+              class="flex-1 px-3 py-2 text-sm rounded border border-[color:var(--accent-weak)] text-white bg-white/5 hover:bg-[color:var(--accent-glow)] shadow-[var(--accent-glow)] hover:shadow-[var(--accent-glow-hover)] transition-shadow duration-200"
               on:click={() => setLang("en")}
             >
               EN
             </button>
             <button
               type="button"
-              class="flex-1 px-3 py-2 text-sm rounded border border-[color:var(--accent-weak)] text-white bg-white/5 hover:bg-[color:rgba(16,185,129,0.2)] shadow-[var(--accent-glow)] hover:shadow-[var(--accent-glow-hover)] transition-shadow duration-200"
+              class="flex-1 px-3 py-2 text-sm rounded border border-[color:var(--accent-weak)] text-white bg-white/5 hover:bg-[color:var(--accent-glow)] shadow-[var(--accent-glow)] hover:shadow-[var(--accent-glow-hover)] transition-shadow duration-200"
               on:click={() => setLang("gr")}
             >
               GR
