@@ -1,19 +1,15 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import NavBar from "../components/NavBar.svelte";
+import TBD from "../components/TBD.svelte";
+import { tSeo } from "../lib/i18n/server";
+import type { Locale } from "../lib/i18n/messages";
 
-const seo = {
-    projectsTitle: "Projects",
-    projectsDescription: "Selected work and experiments.",
-};
+const lang = (Astro.currentLocale as Locale) || "en";
+const seo = tSeo(lang);
 ---
 
-<BaseLayout title={seo.projectsTitle} description={seo.projectsDescription}>
-    <section
-        class="pt-28 md:pt-32 flex items-center justify-center min-h-[60vh] px-4"
-    >
-        <div class="text-center space-y-3">
-            <h1 class="text-3xl md:text-4xl font-bold">Projects</h1>
-            <p class="text-slate-300">Content coming.</p>
-        </div>
-    </section>
+<BaseLayout title={seo.projectsTitle} description={seo.projectsDescription} lang={lang}>
+    <NavBar client:load />
+    <TBD client:load pageKey="projects" />
 </BaseLayout>

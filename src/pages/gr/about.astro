@@ -1,0 +1,14 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import NavBar from "../../components/NavBar.svelte";
+import TBD from "../../components/TBD.svelte";
+import { tSeo } from "../../lib/i18n/server";
+
+const lang = "gr";
+const seo = tSeo(lang);
+---
+
+<BaseLayout title={seo.aboutTitle} description={seo.aboutDescription} lang={lang}>
+    <NavBar client:load />
+    <TBD client:load pageKey="about" />
+</BaseLayout>

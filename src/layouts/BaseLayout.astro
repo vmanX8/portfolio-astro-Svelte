@@ -1,23 +1,43 @@
 ---
+import { ClientRouter } from "astro:transitions";
+import type { Locale } from "../lib/i18n/messages";
 import Footer from "../components/Footer.svelte";
 import "../styles/global.css";
 
-const { title = "Portfolio", description = "" } = Astro.props;
+const lang = (Astro.currentLocale as Locale) || "en";
+
+// SEO props (required per page)
+const { title, description } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang === "gr" ? "el" : "en"}>
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>{title}</title>
+        <ClientRouter />
+
+        {title && <title>{title}</title>}
         {description && <meta name="description" content={description} />}
+
+        {title && <meta property="og:title" content={title} />}
+        {
+            description && (
+                <meta property="og:description" content={description} />
+            )
+        }
+        <meta property="og:type" content="website" />
+
         <slot name="head" />
     </head>
-    <body class="bg-slate-950 text-slate-50 min-h-screen flex flex-col">
-        <main class="flex-1">
+
+    <body
+        class="bg-[#110720] text-white antialiased min-h-screen flex flex-col font-sans"
+    >
+        <main class="flex-1 animate-fadeIn">
             <slot />
         </main>
+
         <Footer client:load />
     </body>
 </html>
