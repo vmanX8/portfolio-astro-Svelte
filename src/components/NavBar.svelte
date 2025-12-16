@@ -321,14 +321,14 @@
           <div class="flex gap-2">
             <button
               type="button"
-              class="flex-1 px-3 py-2 text-sm rounded border border-[color:var(--accent-weak)] text-white bg-white/5 hover:bg-[color:rgba(16,185,129,0.2)] shadow-[var(--accent-glow)] hover:shadow-[var(--accent-glow-hover)] transition-shadow duration-200"
+              class="flex-1 px-3 py-2 text-sm rounded border border-[color:var(--accent-weak)] text-white bg-white/5 hover:bg-[color:var(--accent-glow)] shadow-[var(--accent-glow)] hover:shadow-[var(--accent-glow-hover)] transition-shadow duration-200"
               on:click={() => setLang("en")}
             >
               EN
             </button>
             <button
               type="button"
-              class="flex-1 px-3 py-2 text-sm rounded border border-[color:var(--accent-weak)] text-white bg-white/5 hover:bg-[color:rgba(16,185,129,0.2)] shadow-[var(--accent-glow)] hover:shadow-[var(--accent-glow-hover)] transition-shadow duration-200"
+              class="flex-1 px-3 py-2 text-sm rounded border border-[color:var(--accent-weak)] text-white bg-white/5 hover:bg-[color:var(--accent-glow)] shadow-[var(--accent-glow)] hover:shadow-[var(--accent-glow-hover)] transition-shadow duration-200"
               on:click={() => setLang("gr")}
             >
               GR
