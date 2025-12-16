@@ -17,7 +17,7 @@
 
 <footer class="border-t border-white/10 bg-[#130a27]">
   <div
-    class="max-w-5xl mx-auto px-4 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-400"
+    class="max-w-5xl mx-auto px-4 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-300"
   >
     <p>
       &copy; {year}
