@@ -55,6 +55,20 @@ export const messages = {
 		ctaContact: "Let’s build something",
 	},
 
+		projectsSection: {
+		title: "Projects",
+		subtitle:
+			"A selection of work (real or demo). Click a card to see details.",
+		ctaView: "View details",
+		modalTitle: "Project details",
+		close: "Close",
+		tags: "Tech",
+		links: "Links",
+		liveDemo: "Live demo",
+		sourceCode: "Source code",
+		empty: "No projects to show yet.",
+	},
+
 	contactSection: {
 		title: "Contact",
 		subtitle:
@@ -121,6 +135,20 @@ export const messages = {
 				"«Το design χωρίς στρατηγική είναι απλά διακόσμηση. Mε στρατηγική είναι ο τρόπος που το site μας μιλά πριν διαβαστεί έστω μία λέξη.»",
 			ctaProjects: "Η δουλειά μου",
 			ctaContact: "Επικοινωνήστε μαζί μου",
+		},
+
+		projectsSection: {
+			title: "Projects",
+			subtitle:
+				"Μερικά δείγματα δουλειάς (πραγματικά ή demo). Πατήστε στην κάρτα για λεπτομέρειες.",
+			ctaView: "Λεπτομέρειες",
+			modalTitle: "Περισσότερα για το Project",
+			close: "Κλείσιμο",
+			tags: "Τεχνολογίες",
+			links: "Σύνδεσμοι",
+			liveDemo: "Live demo",
+			sourceCode: "Source code",
+			empty: "Δεν υπάρχουν Projects ακόμη.",
 		},
 
 		contactSection: {
