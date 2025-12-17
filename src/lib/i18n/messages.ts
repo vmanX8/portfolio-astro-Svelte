@@ -98,7 +98,7 @@ export const messages = {
 			badge: "Portfolio",
 			titleHi: "Γειά σας, με λένε",
 			name: "Βαγγέλη",
-			role: "Είμαι Προγραμματιστής Frontend",
+			role: "Και είμαι Frontend Engineer",
 			tagline:
 				"«Το design χωρίς στρατηγική είναι απλά διακόσμηση, με στρατηγική είναι ο τρόπος που το site μας μιλά πριν διαβαστεί έστω μία λέξη.»",
 			ctaProjects: "Projects",

@@ -43,13 +43,13 @@
                 >
                     <span
                         aria-hidden="true"
-                        class="text-3xl sm:text-4xl font-bold tracking-tight text-slate-100 leading-none"
+                        class="text-3xl sm:text-4xl font-bold tracking-tight text-teal-100 leading-none"
                         >{initials}</span
                     >
                     {#if subtitle}
                         <span
                             aria-hidden="true"
-                            class="text-[10px] uppercase tracking-[0.35em] text-slate-300 mt-1 block"
+                            class="text-[10px] uppercase tracking-[0.35em] text-teal-200 mt-1 block"
                             >{subtitle}</span
                         >
                     {/if}
