@@ -2,6 +2,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import NavBar from "../../components/NavBar.svelte";
 import HeroSect from "../../components/sections/HeroSect.svelte";
+import AboutSect from "../../components/sections/AboutSect.svelte";
 import { tSeo } from "../../lib/i18n/server";
 
 const lang = "gr";
@@ -11,4 +12,5 @@ const seo = tSeo(lang);
 <BaseLayout title={seo.homeTitle} description={seo.homeDescription} lang={lang}>
 	<NavBar client:load />
 	<HeroSect client:load />
+	<AboutSect client:load />
 </BaseLayout>

@@ -15,7 +15,7 @@
     <h1 class="text-3xl md:text-4xl font-bold">
       {$t(`pages.${pageKey}.title`)}
     </h1>
-    <p class="text-slate-300">
+    <p class="text-teal-100">
       {$t("pages.notReady")}
     </p>
     <a

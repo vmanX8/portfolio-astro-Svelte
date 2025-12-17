@@ -67,7 +67,7 @@
 
             <!-- role typed after name -->
             {#if roleStarted}
-              <span class="text-slate-300">
+              <span class="text-teal-100">
                 <Typewriter
                   text={$t("hero.role")}
                   speed={34}
@@ -79,7 +79,7 @@
           </h1>
 
           <!-- tagline typed, then CTAs appear -->
-          <p class="max-w-xl text-slate-300">
+          <p class="max-w-xl text-teal-100">
             {#if taglineStarted}
               <Typewriter
                 text={$t("hero.tagline")}

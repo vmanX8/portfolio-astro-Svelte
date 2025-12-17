@@ -189,7 +189,7 @@
       </ul>
 
       <div class="flex items-center gap-2">
-        <span class="text-slate-300 text-sm">{$t("nav.language")}:</span>
+        <span class="text-teal-100 text-sm">{$t("nav.language")}:</span>
         <button
           type="button"
           class="px-2 py-1 text-sm rounded border border-[color:var(--accent-weak)] text-white bg-white/5 hover:bg-[color:var(--accent-glow-hover)] shadow-[var(--accent-glow)] hover:shadow-[var(--accent-glow-hover)] transition-shadow duration-200"
