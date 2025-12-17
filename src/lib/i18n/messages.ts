@@ -6,14 +6,17 @@ export type Locale = "en" | "gr";
 export const messages = {
   en: {
     seo: {
-      homeTitle: "My Portfolio",
+      homeTitle: "VM | My Portfolio",
       homeDescription:
         "Welcome to my portfolio built with Astro, Svelte, and Tailwind. Fast, responsive, and SEO-friendly.",
-      aboutTitle: "About me",
+		
+      aboutTitle: "VM | About me",
       aboutDescription: "About page (coming soon).",
-      projectsTitle: "My Projects",
+
+      projectsTitle: "VM | My Projects",
       projectsDescription: "Projects page (coming soon).",
-      contactTitle: "Contact",
+
+      contactTitle: "VM | Contact",
       contactDescription: "Contact page (coming soon).",
     },
     nav: {
@@ -69,17 +72,17 @@ export const messages = {
   },
   gr: {
 		seo: {
-			homeTitle: "Το Portfolio μου",
+			homeTitle: "ΒΜ | Το Portfolio μου",
 			homeDescription:
 				"Καλώς ήλθατε στο Portfolio μου. Σχεδιάστηκε με Astro + Svelte + Tailwind. Γρήγορο, responsive και φιλικό στο SEO.",
 
-			aboutTitle: "Σχετικά με εμένα",
+			aboutTitle: "ΒΜ | Σχετικά με εμένα",
 			aboutDescription: "Σελίδα Σχετικά (σύντομα κοντά σας).",
 
-			projectsTitle: "Τα Projects μου",
+			projectsTitle: "ΒΜ | Τα Projects μου",
 			projectsDescription: "Σελίδα Projects (σύντομα κοντά σας).",
 
-			contactTitle: "Επικοινωνία",
+			contactTitle: "ΒΜ | Επικοινωνία",
 			contactDescription: "Σελίδα Επικοινωνία (σύντομα κοντά σας).",
 		},
 		nav: {
@@ -101,7 +104,7 @@ export const messages = {
 		},
 
 		footer: {
-			name: "VM Portfolio",
+			name: "ΒΜ Portfolio",
 			rights: "Με επιφύλαξη παντός δικαιώματος.",
 			home: "Αρχική",
 			about: "Σχετικά",
