@@ -114,7 +114,7 @@
                   <div class="flex flex-wrap gap-2 mb-4">
                     {#each p.tech as tech}
                       <span
-                        class="text-[11px] uppercase tracking-wide px-2 py-1 rounded-full bg-[color:var(--surface)]/10 border border-white/5 text-slate-200 transition-colors"
+                        class="text-[11px] uppercase tracking-wide px-2 py-1 rounded-full bg-[color:var(--accent)]/10 border border-white/5 text-slate-200 transition-colors"
                       >
                         {tech}
                       </span>
@@ -187,7 +187,7 @@
 
           <button
             type="button"
-            class="modal-cta icon border border-[color:var(--surface)] p-1 text-white focus:outline-none focus:ring-2 focus:ring-[color:var(--accent)]/60"
+            class="modal-cta icon p-1 text-white focus:outline-none focus:ring-2 focus:ring-[color:var(--accent)]/60"
             on:click={close}
             aria-label={$t("projectsSection.close")}
           >
@@ -226,7 +226,7 @@
                   href={selected.demoUrl}
                   target="_blank"
                   rel="noreferrer"
-                  class="modal-cta demo inline-flex items-center justify-center border border-[color:var(--accent-weak)]/50 px-4 py-2 text-sm text-[color:var(--accent)] focus:outline-none focus:ring-2 focus:ring-[color:var(--accent)]/60"
+                  class="modal-cta demo inline-flex items-center justify-center border border-[color:var(--accent-weak)] px-4 py-2 text-sm text-[color:var(--accent)] focus:outline-none focus:ring-2 focus:ring-[color:var(--accent)]/60"
                 >
                   {$t("projectsSection.liveDemo")}
                 </a>
@@ -237,7 +237,7 @@
                   href={selected.repoUrl}
                   target="_blank"
                   rel="noreferrer"
-                  class="modal-cta inline-flex items-center justify-center border border-[color:var(--surface)] px-4 py-2 text-sm text-slate-200 focus:outline-none focus:ring-2 focus:ring-[color:var(--accent)]/60"
+                  class="modal-cta inline-flex items-center justify-center border border-[color:var(--accent-weak)] px-4 py-2 text-sm text-slate-200 focus:outline-none focus:ring-2 focus:ring-[color:var(--accent)]/60"
                 >
                   {$t("projectsSection.sourceCode")}
                 </a>
@@ -250,7 +250,7 @@
         <footer class="px-5 py-4 border-t border-white/10 flex justify-end">
           <button
             type="button"
-            class="modal-cta border border-[color:var(--surface)] px-4 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-[color:var(--accent)]/60"
+            class="modal-cta px-4 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-[color:var(--accent)]/60"
             on:click={close}
           >
             {$t("projectsSection.close")}
@@ -261,84 +261,3 @@
   {/if}
 </section>
 
-<style>
-  .cta-underline {
-    position: relative;
-    display: inline-block;
-    color: var(--accent);
-    transition: color 180ms ease;
-  }
-
-  .cta-underline::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -3px;
-    height: 2px;
-    width: 50%;
-    background: var(--accent);
-    transition:
-      width 200ms ease,
-      background-color 200ms ease;
-    border-radius: 2px;
-  }
-
-  /* Hover on the CTA or its parent group (card) expands the underline and darkens color */
-  .cta-underline:hover,
-  .group:hover .cta-underline {
-    color: var(--accent-dark);
-  }
-
-  .cta-underline:hover::after,
-  .group:hover .cta-underline::after {
-    width: 100%;
-    background: var(--accent-dark);
-  }
-
-  /* Respect reduced motion preferences */
-  @media (prefers-reduced-motion: reduce) {
-    .cta-underline,
-    .cta-underline::after {
-      transition: none !important;
-    }
-
-    .modal-cta,
-    .modal-cta::after,
-    .modal-cta.icon {
-      transition: none !important;
-    }
-  }
-
-  /* Modal CTA: square by default, morphs to circular on hover with subtle shadow */
-  .modal-cta {
-    border-radius: 8px; /* squarish */
-    transition:
-      border-radius 160ms ease,
-      box-shadow 180ms ease,
-      transform 150ms ease,
-      background-color 150ms ease;
-    will-change: border-radius, box-shadow, transform;
-  }
-
-  .modal-cta:hover,
-  .modal-cta:focus {
-    border-radius: 9999px; /* circle */
-    transform: translateY(-2px);
-  }
-
-  /* Only demo CTA gets a subtle, soft shadow on hover */
-  .modal-cta.demo:hover,
-  .modal-cta.demo:focus {
-    box-shadow: 0 6px 12px rgba(16, 185, 129, 0.18);
-  }
-
-  /* Header icon specific sizing */
-  .modal-cta.icon {
-    width: 40px;
-    height: 40px;
-    padding: 6px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
-</style>

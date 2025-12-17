@@ -14,14 +14,6 @@ Developer-focused README for the repository. This file summarizes architecture, 
 
 ---
 
-## 📦 npm scripts
-
-- `npm run dev` — start dev server (default: `http://localhost:4321`)
-- `npm run build` — production build
-- `npm run preview` — preview production build locally
-
----
-
 ## 🗂️ Project layout (high level)
 
 src/
@@ -84,24 +76,10 @@ public/
 
 ---
 
-## ♿ Accessibility & Reduced Motion
-- Focus rings, `aria-*` labels and roles are used across interactive elements (modals, buttons, links).
-- All animations respect `prefers-reduced-motion` (they stop animating and keep a static state).
-- Keyboard support: Escape closes modals, focusable buttons/links.
-
----
-
 ## 🔍 Troubleshooting & Common Gotchas
 - Missing icons / ENOENT: If you placed icons in `public/assets/projects/` and the app still attempts to fetch `/assets/projects/en/...`, update references in `src/lib/content/projects.ts` to the shared `/assets/projects/<id>.svg`. `SvgInline` tries to normalize legacy localized paths but it's best to use canonical shared paths.
 - SVG sizing: If an icon looks squashed, ensure the SVG has a `viewBox` attribute or uses explicit `width`/`height` so `SvgInline` can add a `viewBox` if required.
 - Logging: `SvgInline` will `console.warn` when it normalizes localized paths and `console.error` on load failures — check the browser console when troubleshooting icons.
-
----
-
-## 🤝 Contributing
-- Create an issue or PR describing the change.
-- Follow the pattern: small, focused PRs with clear commit messages.
-- Include screenshots or short GIFs for UI changes where helpful.
 
 ---
 
@@ -114,12 +92,3 @@ npm run build
 ```
 
 ---
-
-## 🧠 Final Thoughts (for junior devs)
-- Keep components small and well-documented — many files contain TSDoc comments and short developer notes.
-- Prefer updating `src/lib/content/projects.ts` for project content rather than sprinkling strings throughout the UI — one source of truth makes translations easier.
-- Consider converting frequently-used or critical SVGs to Svelte components for build-time inlining if you want to remove the client fetch from `SvgInline`.
-
----
-
-If you'd like, I can also add a small `CONTRIBUTING.md`, a PR template, or a dev script that validates all `icon` paths referenced in `projects.ts` exist in `public/assets/projects/` (useful to prevent ENOENT runtime issues).

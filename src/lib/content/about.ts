@@ -60,7 +60,7 @@ export const aboutContent = {
 
 			"Front-end is my main focus and passion. Full-stack knowledge interests me as a future complement, but my priority right now is to grow as a front-end developer. My goal is to build a strong portfolio of clean, intentional websites that feel intuitive and enjoyable to use, within collaborative and creative teams.",
 
-			"I’m especially drawn to creative studio environments like Web Eleven, where website design and implementation go hand in hand. I thrive in collaborative teams and aim to grow through meaningful, real-world projects."
+			"I’m especially drawn to creative studio environments like Webeleven, where website design and implementation go hand in hand. I thrive in collaborative teams and aim to grow through meaningful, real-world projects."
 		]
 	},
 
@@ -75,7 +75,7 @@ export const aboutContent = {
 
 			"Το front-end είναι το βασικό μου αντικείμενο και πάθος. Το full-stack με ενδιαφέρει ως μελλοντική συμπληρωματική γνώση, όμως αυτή τη στιγμή προτεραιότητά μου είναι να εξελιχθώ όσο το δυνατόν περισσότερο ως front-end developer. Στόχος μου είναι να δημιουργώ καθαρές, ουσιαστικές ιστοσελίδες με έμφαση στην εμπειρία του χρήστη, μέσα σε δημιουργικά και συνεργατικά περιβάλλοντα.",
 
-			"Με ελκύουν περιβάλλοντα δημιουργικού χαρακτήρα όπως η Web Eleven, όπου το website design και η υλοποίηση συνδυάζονται ουσιαστικά. Απολαμβάνω τη συνεργασία και τη συνεχή εξέλιξη μέσα από πραγματικά projects."
+			"Με ελκύουν περιβάλλοντα δημιουργικού χαρακτήρα όπως η Webeleven, όπου το website design και η υλοποίηση συνδυάζονται ουσιαστικά. Απολαμβάνω τη συνεργασία και τη συνεχή εξέλιξη μέσα από πραγματικά projects."
 		]
 	}
 } as const;
