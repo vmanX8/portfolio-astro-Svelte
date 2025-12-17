@@ -58,7 +58,7 @@ export const messages = {
 		projectsSection: {
 		title: "Projects",
 		subtitle:
-			"A selection of work (real or demo). Click a card to see details.",
+			"A selection of work. Click a card to see details.",
 		ctaView: "View details",
 		modalTitle: "Project details",
 		close: "Close",
@@ -140,7 +140,7 @@ export const messages = {
 		projectsSection: {
 			title: "Projects",
 			subtitle:
-				"Μερικά δείγματα δουλειάς (πραγματικά ή demo). Πατήστε στην κάρτα για λεπτομέρειες.",
+				"Μερικά δείγματα δουλειάς. Πατήστε στην κάρτα για λεπτομέρειες.",
 			ctaView: "Λεπτομέρειες",
 			modalTitle: "Περισσότερα για το Project",
 			close: "Κλείσιμο",
