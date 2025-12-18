@@ -25,15 +25,13 @@
 ============================================================================= -->
 <section
   id="contact"
-  class="pt-24 md:pt-28 pb-24"
+  class="section-spacing pb-24"
   aria-labelledby="contact-title"
 >
-  <div class="mx-auto max-w-5xl px-4">
+  <div class="section-shell">
     <!-- Scroll animation wrapper -->
     <InView>
-      <div
-        class="rounded-2xl border border-teal-800 bg-teal-700/10 p-6 md:p-10"
-      >
+      <div class="section-panel">
         <!-- -------------------------------------------------------------------
           Section header
         -------------------------------------------------------------------- -->
@@ -58,7 +56,7 @@
             </label>
             <input
               id="contact-name"
-              class="w-full rounded-xl border border-teal-800 bg-[color:var(--surface)] px-4 py-3 placeholder:text-teal-700 focus:outline-none focus:ring-2 focus:ring-[color:var(--accent)]/60"
+              class="form-control"
               type="text"
               name="name"
               autocomplete="name"
@@ -73,7 +71,7 @@
             </label>
             <input
               id="contact-email"
-              class="w-full rounded-xl border border-teal-800 bg-[color:var(--surface)] px-4 py-3 placeholder:text-teal-700 focus:outline-none focus:ring-2 focus:ring-[color:var(--accent)]/60"
+              class="form-control"
               type="email"
               name="email"
               autocomplete="email"
@@ -88,7 +86,7 @@
             </label>
             <input
               id="contact-subject"
-              class="w-full rounded-xl border border-teal-800 bg-[color:var(--surface)] px-4 py-3 placeholder:text-teal-700 focus:outline-none focus:ring-2 focus:ring-[color:var(--accent)]/60"
+              class="form-control"
               type="text"
               name="subject"
               autocomplete="off"
@@ -103,7 +101,7 @@
             </label>
             <textarea
               id="contact-message"
-              class="w-full min-h-[140px] rounded-xl border border-teal-800 bg-[color:var(--surface)] px-4 py-3 placeholder:text-teal-500 focus:outline-none focus:ring-2 focus:ring-[color:var(--accent)]/60"
+              class="form-control form-textarea"
               name="message"
               placeholder={$t("contactSection.messagePlaceholder")}
             ></textarea>

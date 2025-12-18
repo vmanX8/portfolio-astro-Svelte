@@ -10,7 +10,7 @@
   import { setupI18n } from "../../lib/i18n/i18n";
   import { projectsByLanguage, type Project } from "../../lib/content/projects";
   import InView from "../ui/InView.svelte";
-  import { modal, backdrop, clipReveal } from "../ui/modalFx";
+  import { backdrop, clipReveal } from "../ui/modalFx";
   import SvgInline from "../ui/SvgInline.svelte";
   import ProjectIcon from "../ui/ProjectIcon.svelte";
   setupI18n();
@@ -53,8 +53,8 @@
 <!-- =========================================================================
   Section wrapper (Home - Section 3)
 ============================================================================= -->
-<section id="projects" class="pt-24 md:pt-28" aria-labelledby="projects-title">
-  <div class="mx-auto max-w-5xl px-4">
+<section id="projects" class="section-spacing" aria-labelledby="projects-title">
+  <div class="section-shell">
     <!-- Scroll animation wrapper (extra points) -->
     <InView>
       <!-- -------------------------------------------------------------------

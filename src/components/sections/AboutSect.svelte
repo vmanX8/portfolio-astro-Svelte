@@ -221,12 +221,10 @@
 <!-- =========================================================================
   Section wrapper (Home - Section 2)
 ============================================================================= -->
-<section id="about" class="pt-24 md:pt-28" aria-labelledby="about-title">
-  <div class="mx-auto max-w-5xl px-4">
+<section id="about" class="section-spacing" aria-labelledby="about-title">
+  <div class="section-shell">
     <InView>
-      <div
-        class="rounded-2xl border border-teal-800 bg-teal-700/10 p-6 md:p-10"
-      >
+      <div class="section-panel">
         <h2 id="about-title" class="text-2xl md:text-3xl font-bold mb-6">
           {data.title}
         </h2>

@@ -25,7 +25,7 @@
   Section wrapper (Home - Section 1)
 ============================================================================= -->
 <section id="home" class="pt-28 md:pt-32" aria-labelledby="hero-title">
-  <div class="mx-auto max-w-5xl px-4">
+  <div class="section-shell">
     <!-- Scroll animation wrapper -->
     <InView>
       <div class="grid items-center gap-10 md:grid-cols-2">
@@ -126,7 +126,3 @@
     </InView>
   </div>
 </section>
-
-<style>
-  /* Rotating visuals moved to `src/components/ui/RotatingRing.svelte` */
-</style>
