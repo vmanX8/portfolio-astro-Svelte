@@ -26,11 +26,14 @@
   // Import the Locale type (either "en" or "gr")
   import type { Locale } from "../lib/i18n/messages";
 
-  // Import Svelte lifecycle hook to clean up when component is destroyed
-  import { onDestroy } from "svelte";
+  // Import Svelte lifecycle hooks
+  import { onDestroy, onMount } from "svelte";
 
   // Import Astro's navigate function for smooth page transitions
   import { navigate } from "astro:transitions/client";
+
+  // Shared nav link definitions and locale-aware path helper
+  import { navLinks, normalizePath } from "./ui/navLinks";
 
   // Initialize i18n system - detects language from URL and sets up translations
   setupI18n();
@@ -43,11 +46,36 @@
   // This is a reactive variable - when it changes, the UI updates automatically
   let open = false;
   let currentLocale: Locale = "en";
+  let activePath = "/";
+
+  // Initialize active path immediately on the client to avoid a flash of the wrong active link
+  if (typeof window !== "undefined") {
+    activePath = normalizePath(window.location.pathname);
+  }
 
   // Keep local copy of the current locale so links stay in the active language
   const unsubscribe = locale.subscribe((value) => {
     currentLocale = (value as Locale) ?? "en";
   });
+
+  /**
+   * refreshActivePath - Sync the active path with the current URL.
+   *
+   * Runs on mount and after client-side navigations so the correct nav item is highlighted.
+   */
+  function refreshActivePath() {
+    if (typeof window === "undefined") return;
+    activePath = normalizePath(window.location.pathname);
+  }
+
+  /**
+   * isActiveLink - Check if a nav item should be marked active.
+   *
+   * @param path - Base route (unlocalized), e.g. "/about"
+   */
+  function isActiveLink(path: string) {
+    return normalizePath(path) === activePath;
+  }
 
   // === FUNCTIONS ===
 
@@ -142,6 +170,24 @@
     onDestroy(() => window.removeEventListener("keydown", onKeyDown));
   }
 
+  // Track navigation changes so active link highlighting stays in sync
+  onMount(() => {
+    const handleAfterSwap = () => refreshActivePath();
+    const handlePageLoad = () => refreshActivePath();
+    const handlePopState = () => refreshActivePath();
+
+    refreshActivePath();
+    window.addEventListener("astro:after-swap", handleAfterSwap);
+    window.addEventListener("astro:page-load", handlePageLoad);
+    window.addEventListener("popstate", handlePopState);
+
+    return () => {
+      window.removeEventListener("astro:after-swap", handleAfterSwap);
+      window.removeEventListener("astro:page-load", handlePageLoad);
+      window.removeEventListener("popstate", handlePopState);
+    };
+  });
+
   // Clean up the locale subscription when component is destroyed
   onDestroy(unsubscribe);
 </script>
@@ -158,49 +204,44 @@
     <!-- Desktop menu -->
     <div class="hidden md:flex items-center gap-8">
       <ul class="flex items-center gap-8">
-        <li>
-          <a
-            href={localizedHref("/")}
-            class="text-white hover:text-[color:var(--accent)] transition-colors duration-150"
-            >{$t("nav.home")}</a
-          >
-        </li>
-        <li>
-          <a
-            href={localizedHref("/about")}
-            class="text-white hover:text-[color:var(--accent)] transition-colors duration-150"
-            >{$t("nav.about")}</a
-          >
-        </li>
-        <li>
-          <a
-            href={localizedHref("/projects")}
-            class="text-white hover:text-[color:var(--accent)] transition-colors duration-150"
-            >{$t("nav.projects")}</a
-          >
-        </li>
-        <li>
-          <a
-            href={localizedHref("/contact")}
-            class="text-white hover:text-[color:var(--accent)] transition-colors duration-150"
-            >{$t("nav.contact")}</a
-          >
-        </li>
+        {#each navLinks as link}
+          <li>
+            <a
+              href={localizedHref(link.path)}
+              class={`transition-colors duration-150 hover:text-[color:var(--accent)] ${
+                isActiveLink(link.path) ? "nav-active font-semibold" : "text-white"
+              }`}
+              aria-current={isActiveLink(link.path) ? "page" : undefined}
+            >
+              {$t(link.labelKey)}
+            </a>
+          </li>
+        {/each}
       </ul>
 
       <div class="flex items-center gap-2">
         <span class="text-teal-100 text-sm">{$t("nav.language")}:</span>
         <button
           type="button"
-          class="px-2 py-1 text-sm rounded border border-[color:var(--accent-weak)] text-white bg-white/5 hover:bg-[color:var(--accent-glow-hover)] hover:shadow-[var(--accent-glow-hover)] transition-shadow duration-200"
+          class={`px-2 py-1 text-sm rounded border border-[color:var(--accent-weak)] transition-shadow duration-200 ${
+            currentLocale === "en"
+              ? "lang-active"
+              : "text-white bg-white/5 hover:bg-[color:var(--accent-glow-hover)] hover:shadow-[var(--accent-glow-hover)]"
+          }`}
           on:click={() => setLang("en")}
+          aria-pressed={currentLocale === "en"}
         >
           EN
         </button>
         <button
           type="button"
-          class="px-2 py-1 text-sm rounded border border-[color:var(--accent-weak)] text-white bg-white/5 hover:bg-[color:var(--accent-glow-hover)] hover:shadow-[var(--accent-glow-hover)] transition-shadow duration-200"
+          class={`px-2 py-1 text-sm rounded border border-[color:var(--accent-weak)] transition-shadow duration-200 ${
+            currentLocale === "gr"
+              ? "lang-active"
+              : "text-white bg-white/5 hover:bg-[color:var(--accent-glow-hover)] hover:shadow-[var(--accent-glow-hover)]"
+          }`}
           on:click={() => setLang("gr")}
+          aria-pressed={currentLocale === "gr"}
         >
           GR
         </button>
@@ -278,42 +319,22 @@
 
       <div class="px-4 py-4 bg-[color:var(--background)]">
         <ul class="flex flex-col gap-2">
-          <li>
-            <a
-              href={localizedHref("/")}
-              class="block rounded-lg px-3 py-2 text-white hover:bg-white/10"
-              on:click={close}
-            >
-              {$t("nav.home")}
-            </a>
-          </li>
-          <li>
-            <a
-              href={localizedHref("/about")}
-              class="block rounded-lg px-3 py-2 text-white hover:bg-white/10"
-              on:click={close}
-            >
-              {$t("nav.about")}
-            </a>
-          </li>
-          <li>
-            <a
-              href={localizedHref("/projects")}
-              class="block rounded-lg px-3 py-2 text-white hover:bg-white/10"
-              on:click={close}
-            >
-              {$t("nav.projects")}
-            </a>
-          </li>
-          <li>
-            <a
-              href={localizedHref("/contact")}
-              class="block rounded-lg px-3 py-2 text-white hover:bg-white/10"
-              on:click={close}
-            >
-              {$t("nav.contact")}
-            </a>
-          </li>
+          {#each navLinks as link}
+            <li>
+              <a
+                href={localizedHref(link.path)}
+                class={`block rounded-lg px-3 py-2 hover:bg-white/10 ${
+                  isActiveLink(link.path)
+                    ? "nav-active-mobile font-semibold"
+                    : "text-white"
+                }`}
+                aria-current={isActiveLink(link.path) ? "page" : undefined}
+                on:click={close}
+              >
+                {$t(link.labelKey)}
+              </a>
+            </li>
+          {/each}
         </ul>
 
         <div class="mt-6 pt-6 border-t border-white/10">
@@ -321,15 +342,25 @@
           <div class="flex gap-2">
             <button
               type="button"
-              class="flex-1 px-3 py-2 text-sm rounded border border-[color:var(--accent-weak)] text-white bg-white/5 hover:bg-[color:var(--accent-glow)] shadow-[var(--accent-glow)] hover:shadow-[var(--accent-glow-hover)] transition-shadow duration-200"
+              class={`flex-1 px-3 py-2 text-sm rounded border border-[color:var(--accent-weak)] transition-shadow duration-200 ${
+                currentLocale === "en"
+                  ? "lang-active"
+                  : "text-white bg-white/5 hover:bg-[color:var(--accent-glow)] shadow-[var(--accent-glow)] hover:shadow-[var(--accent-glow-hover)]"
+              }`}
               on:click={() => setLang("en")}
+              aria-pressed={currentLocale === "en"}
             >
               EN
             </button>
             <button
               type="button"
-              class="flex-1 px-3 py-2 text-sm rounded border border-[color:var(--accent-weak)] text-white bg-white/5 hover:bg-[color:var(--accent-glow)] shadow-[var(--accent-glow)] hover:shadow-[var(--accent-glow-hover)] transition-shadow duration-200"
+              class={`flex-1 px-3 py-2 text-sm rounded border border-[color:var(--accent-weak)] transition-shadow duration-200 ${
+                currentLocale === "gr"
+                  ? "lang-active"
+                  : "text-white bg-white/5 hover:bg-[color:var(--accent-glow)] shadow-[var(--accent-glow)] hover:shadow-[var(--accent-glow-hover)]"
+              }`}
               on:click={() => setLang("gr")}
+              aria-pressed={currentLocale === "gr"}
             >
               GR
             </button>
