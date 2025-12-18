@@ -8,7 +8,7 @@
   const year = new Date().getFullYear();
 </script>
 
-<footer class="border-t border-white/10 [color:var(--surface)]">
+<footer class="border-t border-white/10 bg-[color:var(--surface)] text-white">
   <div
     class="max-w-5xl mx-auto px-4 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-teal-100"
   >

@@ -2,31 +2,6 @@ import { cubicIn, cubicOut } from "svelte/easing";
 import type { TransitionConfig } from "svelte/transition";
 
 /**
- * modal - Reusable open/close transition for dialogs
- * - combines subtle vertical motion, scale and fade
- */
-export function modal(
-  node: Element,
-  { delay = 0, duration = 240 } = {}
-): TransitionConfig {
-  const style = getComputedStyle(node);
-  const targetOpacity = parseFloat(style.opacity) || 1;
-
-  return {
-    delay,
-    duration,
-    easing: cubicOut,
-    css: (t: number) => {
-      const eased = cubicOut(t);
-      const opacity = eased * targetOpacity;
-      const y = (1 - eased) * 10; // px
-      const scale = 0.98 + eased * 0.02;
-      return `opacity: ${opacity}; transform: translateY(${y}px) scale(${scale});`;
-    },
-  };
-}
-
-/**
  * backdrop - Simple fade for overlays/backdrops
  */
 export function backdrop(
