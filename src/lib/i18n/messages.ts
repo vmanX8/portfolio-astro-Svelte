@@ -50,7 +50,7 @@ export const messages = {
 		name: "Vangelis",
 		role: "Frontend Engineer",
 		tagline:
-			"“Design is not decoration, it’s the way your website speaks before a single word is read.”",
+			"“Good front-end is where engineering discipline meets human experience.”",
 		ctaProjects: "See my work", 
 		ctaContact: "Let’s build something",
 	},
@@ -132,7 +132,7 @@ export const messages = {
 			name: "Βαγγέλη",
 			role: "Frontend Engineer",
 			tagline:
-				"«Το design χωρίς στρατηγική είναι απλά διακόσμηση. Mε στρατηγική είναι ο τρόπος που το site μας μιλά πριν διαβαστεί έστω μία λέξη.»",
+				"«Το front-end είναι το σημείο όπου η τεχνολογία γίνεται εμπειρία.»",
 			ctaProjects: "Η δουλειά μου",
 			ctaContact: "Επικοινωνήστε μαζί μου",
 		},

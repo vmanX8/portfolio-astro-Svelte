@@ -1,0 +1,32 @@
+---
+import { getPathByLocale, getRelativeLocaleUrl } from "astro:i18n";
+import NavBar from "./NavBar.svelte";
+import { navLinks } from "./ui/navLinks";
+import type { Locale } from "../lib/i18n/messages";
+
+const lang = (Astro.currentLocale as Locale) || "en";
+const localePath = getPathByLocale(lang);
+const pathWithoutLocale =
+  Astro.url.pathname.replace(new RegExp(`^/${localePath}(?=/|$)`), "") || "/";
+const pathForLocale = pathWithoutLocale.replace(/^\/+/, "");
+
+const navItems = navLinks.map((link) => ({
+  href: getRelativeLocaleUrl(lang, link.path === "/" ? "" : link.path.slice(1)),
+  labelKey: link.labelKey,
+}));
+
+const languageSwitch = {
+  en: getRelativeLocaleUrl("en", pathForLocale),
+  gr: getRelativeLocaleUrl("gr", pathForLocale),
+};
+
+const homeHref = getRelativeLocaleUrl(lang);
+---
+
+<NavBar
+  client:load
+  locale={lang}
+  navItems={navItems}
+  languageSwitch={languageSwitch}
+  homeHref={homeHref}
+/>

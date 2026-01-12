@@ -1,9 +1,19 @@
 <script lang="ts">
-    export let sizeClass: string = "h-56 w-56 sm:h-64 sm:w-64";
-    export let initials: string = "VM";
-    export let subtitle: string = "Frontend";
-    export let ariaLabel: string = "Avatar";
-    export let showOrbit: boolean = true;
+    type Props = {
+        sizeClass?: string;
+        initials?: string;
+        subtitle?: string;
+        ariaLabel?: string;
+        showOrbit?: boolean;
+    };
+
+    let {
+        sizeClass = "h-56 w-56 sm:h-64 sm:w-64",
+        initials = "VM",
+        subtitle = "Frontend",
+        ariaLabel = "Avatar",
+        showOrbit = true,
+    }: Props = $props();
 </script>
 
 <div
@@ -11,32 +21,24 @@
     aria-hidden="true"
     aria-label={ariaLabel}
 >
-    {#if true}
-        <!-- soft glow -->
-        <div
-            class="absolute -inset-8 rounded-full blur-3xl bg-[color:var(--accent)]/15 rot-glow"
-        ></div>
-    {/if}
+    <div
+        class="absolute -inset-8 rounded-full blur-3xl bg-[color:var(--accent)]/15 rot-glow"
+    ></div>
 
-    <!-- outer ring (rotates) -->
     <div
         class={`relative ${sizeClass} rounded-full p-[2px] bg-gradient-to-tr from-[color:var(--accent)]/60 via-[color:var(--accent-weak)] to-transparent rot-ring`}
     >
-        <!-- inner container -->
         <div
             class="relative h-full w-full rounded-full bg-[color:var(--surface)] border border-white/10 overflow-hidden"
         >
-            <!-- subtle pattern that slowly moves -->
             <div
                 class={`absolute inset-0 opacity-30 rot-pattern bg-[radial-gradient(circle_at_20%_20%,color-mix(in_oklab,var(--accent),transparent_60%),transparent_45%),radial-gradient(circle_at_80%_70%,color-mix(in_oklab,var(--accent),transparent_70%),transparent_55%)]`}
             ></div>
 
-            <!-- inner ring -->
             <div
                 class="absolute inset-3 rounded-full border border-white/10"
             ></div>
 
-            <!-- initials badge (centered vertically) -->
             <div class="absolute inset-0 grid place-items-center">
                 <div
                     class="flex flex-col items-center justify-center h-28 w-28 sm:h-32 sm:w-32 rounded-full bg-[color:var(--background)]/60 border border-white/10 shadow-xl text-center"
@@ -57,7 +59,6 @@
             </div>
 
             {#if showOrbit}
-                <!-- single static highlight dot inside the inner ring -->
                 <div class="inner-highlight" aria-hidden="true"></div>
             {/if}
         </div>
@@ -98,7 +99,6 @@
         }
     }
 
-    /* static highlight positioned inside the inner circle */
     .inner-highlight {
         position: absolute;
         top: 2.4rem; /* slightly adjusted for visual balance */
@@ -127,7 +127,6 @@
         }
     }
 
-    /* respect user's reduced-motion preference */
     @media (prefers-reduced-motion: reduce) {
         .rot-ring,
         .rot-pattern,

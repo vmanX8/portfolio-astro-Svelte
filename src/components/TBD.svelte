@@ -1,11 +1,20 @@
 <script lang="ts">
   import { _ } from "svelte-i18n";
   import { setupI18n } from "../lib/i18n/i18n";
+  import type { Locale } from "../lib/i18n/messages";
 
-  setupI18n();
+  type Props = {
+    locale?: Locale;
+    homeHref?: string;
+    pageKey?: "about" | "projects" | "contact";
+  };
+
+  let { locale = "en", homeHref = "/", pageKey = "about" }: Props = $props();
+
+  $effect.pre(() => {
+    setupI18n(locale);
+  });
   const t = _;
-
-  export let pageKey: "about" | "projects" | "contact" = "about";
 </script>
 
 <section
@@ -19,7 +28,7 @@
       {$t("pages.notReady")}
     </p>
     <a
-      href="/"
+      href={homeHref}
       class="inline-block mt-2 text-[color:var(--accent)] hover:text-[color:var(--accent-glow-hover)] hover:font-semibold transition-colors"
     >
       {$t("pages.backHome")}
