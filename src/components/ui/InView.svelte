@@ -1,36 +1,40 @@
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { inview } from "svelte-inview";
+  import type { ObserverEventDetails, Options } from "svelte-inview";
+  import type { Snippet } from "svelte";
 
-  export let once = true;
+  type Props = {
+    once?: boolean;
+    threshold?: Options["threshold"];
+    rootMargin?: Options["rootMargin"];
+    children?: Snippet;
+  };
 
-  let el: HTMLElement;
-  let shown = false;
+  let {
+    once = true,
+    threshold = 0.5,
+    rootMargin = "0px",
+    children,
+  }: Props = $props();
 
-  onMount(() => {
-    if (typeof window === "undefined") return;
+  let shown = $state(false);
 
-    const io = new IntersectionObserver(
-      (entries) => {
-        const entry = entries[0];
-        if (entry.isIntersecting) {
-          shown = true;
-          if (once) io.disconnect();
-        } else if (!once) {
-          shown = false;
-        }
-      },
-      { threshold: 0.5 },
-    );
+  const options = $derived({
+    threshold,
+    rootMargin,
+    unobserveOnEnter: once,
+  } as Options);
 
-    io.observe(el);
-    return () => io.disconnect();
-  });
+  const handleChange = (event: CustomEvent<ObserverEventDetails>) => {
+    shown = event.detail.inView;
+  };
 </script>
 
 <div
-  bind:this={el}
+  use:inview={options}
+  oninview_change={handleChange}
   class={`transition duration-700 ease-out will-change-transform
     ${shown ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
 >
-  <slot />
+  {@render children?.()}
 </div>

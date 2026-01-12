@@ -1,20 +1,21 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import NavBar from "../../components/NavBar.svelte";
+import NavBarShell from "../../components/NavBarShell.astro";
 import HeroSect from "../../components/sections/HeroSect.svelte";
 import AboutSect from "../../components/sections/AboutSect.svelte";
 import ProjectsSect from "../../components/sections/ProjectsSect.svelte";
 import ContactSect from "../../components/sections/ContactSect.svelte";
 import { tSeo } from "../../lib/i18n/server";
+import type { Locale } from "../../lib/i18n/messages";
 
-const lang = "gr";
+const lang = (Astro.currentLocale as Locale) || "gr";
 const seo = tSeo(lang);
 ---
 
 <BaseLayout title={seo.homeTitle} description={seo.homeDescription} lang={lang}>
-	<NavBar client:load />
-	<HeroSect client:load />
-	<AboutSect client:load />
-	<ProjectsSect client:load />
-	<ContactSect client:load />
+	<NavBarShell />
+	<HeroSect client:load locale={lang} />
+	<AboutSect client:load locale={lang} />
+	<ProjectsSect client:load locale={lang} />
+	<ContactSect client:load locale={lang} />
 </BaseLayout>

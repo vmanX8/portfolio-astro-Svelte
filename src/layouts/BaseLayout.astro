@@ -1,10 +1,39 @@
 ---
+import { getRelativeLocaleUrl } from "astro:i18n";
 import { ClientRouter } from "astro:transitions";
 import type { Locale } from "../lib/i18n/messages";
 import Footer from "../components/Footer.svelte";
 import "../styles/global.css";
 
 const lang = (Astro.currentLocale as Locale) || "en";
+const origin = Astro.url.origin;
+const pathname = Astro.url.pathname;
+const normalizedPath = pathname.startsWith("/gr")
+  ? pathname.slice(3) || "/"
+  : pathname || "/";
+const hreflangLinks = [
+  {
+    hreflang: "en",
+    href: new URL(normalizedPath, origin).toString(),
+  },
+  {
+    hreflang: "el",
+    href: new URL(
+      `/gr${normalizedPath === "/" ? "" : normalizedPath}`,
+      origin
+    ).toString(),
+  },
+  {
+    hreflang: "x-default",
+    href: new URL(normalizedPath, origin).toString(),
+  },
+];
+const footerLinks = [
+  { href: getRelativeLocaleUrl(lang), labelKey: "footer.home" },
+  { href: getRelativeLocaleUrl(lang, "about"), labelKey: "footer.about" },
+  { href: getRelativeLocaleUrl(lang, "projects"), labelKey: "footer.projects" },
+  { href: getRelativeLocaleUrl(lang, "contact"), labelKey: "footer.contact" },
+];
 
 // SEO props (required per page)
 const { title, description } = Astro.props;
@@ -35,6 +64,9 @@ const { title, description } = Astro.props;
             )
         }
         <meta property="og:type" content="website" />
+        {hreflangLinks.map(({ hreflang, href }) => (
+            <link rel="alternate" hreflang={hreflang} href={href} />
+        ))}
 
         <slot name="head" />
     </head>
@@ -46,6 +78,6 @@ const { title, description } = Astro.props;
             <slot />
         </main>
 
-        <Footer client:load />
+        <Footer client:load locale={lang} links={footerLinks} />
     </body>
 </html>

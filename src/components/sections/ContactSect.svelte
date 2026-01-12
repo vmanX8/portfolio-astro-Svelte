@@ -1,55 +1,44 @@
 <script lang="ts">
-  /**
-   * ContactSect (Home - Section 4: Contact)
-   * - UI-only contact form (no backend)
-   * - Accessibility: labels, focus rings, and proper input attributes
-   * - i18n-aware (EN/GR) using svelte-i18n
-   * - InView wrapper for scroll-in animation
-   */
-
   import { _ } from "svelte-i18n";
   import { setupI18n } from "../../lib/i18n/i18n";
+  import type { Locale } from "../../lib/i18n/messages";
   import InView from "../ui/InView.svelte";
 
-  setupI18n();
+  type Props = {
+    locale?: Locale;
+  };
+
+  let { locale = "en" }: Props = $props();
+
+  $effect.pre(() => {
+    setupI18n(locale);
+  });
   const t = _;
 
-  /** UI-only submit handler (prevents page reload). */
   function onSubmit(e: SubmitEvent) {
     e.preventDefault();
   }
 </script>
 
-<!-- =========================================================================
-  Section wrapper (Home - Section 4)
-============================================================================= -->
 <section
   id="contact"
   class="section-spacing pb-24"
   aria-labelledby="contact-title"
 >
   <div class="section-shell">
-    <!-- Scroll animation wrapper -->
     <InView>
       <div class="section-panel">
-        <!-- -------------------------------------------------------------------
-          Section header
-        -------------------------------------------------------------------- -->
         <h2 id="contact-title" class="text-2xl md:text-3xl font-semibold">
           {$t("contactSection.title")}
         </h2>
         <p class="text-sm text-teal-100 font-medium italic mb-6 mt-6">
           {$t("contactSection.subtitle")}
           <span class="ml-1 text-sm text-slate-400 not-italic font-normal">
-            (UI only — no backend connected)</span
+            (UI only - no backend connected)</span
           >
         </p>
 
-        <!-- -------------------------------------------------------------------
-          Form (UI only)
-        -------------------------------------------------------------------- -->
-        <form class="mt-8 grid gap-4 md:grid-cols-2" on:submit={onSubmit}>
-          <!-- Name -->
+        <form class="mt-8 grid gap-4 md:grid-cols-2" onsubmit={onSubmit}>
           <div class="md:col-span-1">
             <label for="contact-name" class="block text-sm mb-2">
               {$t("contactSection.nameLabel")}
@@ -64,7 +53,6 @@
             />
           </div>
 
-          <!-- Email -->
           <div class="md:col-span-1">
             <label for="contact-email" class="block text-sm mb-2">
               {$t("contactSection.emailLabel")}
@@ -79,7 +67,6 @@
             />
           </div>
 
-          <!-- Subject -->
           <div class="md:col-span-2">
             <label for="contact-subject" class="block text-sm mb-2">
               {$t("contactSection.subjectLabel")}
@@ -94,7 +81,6 @@
             />
           </div>
 
-          <!-- Message -->
           <div class="md:col-span-2">
             <label for="contact-message" class="block text-sm mb-2">
               {$t("contactSection.messageLabel")}
@@ -107,7 +93,6 @@
             ></textarea>
           </div>
 
-          <!-- Footer row -->
           <div
             class="md:col-span-2 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pt-2"
           >

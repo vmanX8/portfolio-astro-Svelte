@@ -1,65 +1,49 @@
 <script lang="ts">
-  /**
-   * ProjectsSect (Home - Section 3: Projects)
-   * - Interactive cards + modal
-   * - i18n-aware (EN/GR) via svelte-i18n
-   * - InView wrapper for scroll animation
-   */
-
-  import { _, locale } from "svelte-i18n";
+  import { _, locale as localeStore } from "svelte-i18n";
   import { setupI18n } from "../../lib/i18n/i18n";
+  import type { Locale } from "../../lib/i18n/messages";
   import { projectsByLanguage, type Project } from "../../lib/content/projects";
   import InView from "../ui/InView.svelte";
   import { backdrop, clipReveal } from "../ui/modalFx";
   import SvgInline from "../ui/SvgInline.svelte";
   import ProjectIcon from "../ui/ProjectIcon.svelte";
-  setupI18n();
+
+  type Props = {
+    locale?: Locale;
+  };
+
+  let { locale = "en" }: Props = $props();
+
+  $effect.pre(() => {
+    setupI18n(locale);
+  });
   const t = _;
 
-  // ---- State ---------------------------------------------------------------
+  let selected = $state<Project | null>(null);
 
-  /** The currently selected project (opens modal). */
-  let selected: Project | null = null;
+  const lang = $derived(
+    ($localeStore === "gr" ? "gr" : "en") as "en" | "gr",
+  );
+  const projects = $derived(projectsByLanguage[lang]);
 
-  /**
-   * Map svelte-i18n locale to our supported locales.
-   * (Anything else as 'en' as a safe fallback.)
-   */
-  $: lang = ($locale === "gr" ? "gr" : "en") as "en" | "gr";
-
-  /** Projects shown in the grid, based on current language. */
-  $: projects = projectsByLanguage[lang];
-
-  // ---- Actions -------------------------------------------------------------
-
-  /** Opens the modal with the selected project. */
   function openProject(p: Project) {
     selected = p;
   }
 
-  /** Closes the modal. */
   function close() {
     selected = null;
   }
 
-  // ---- Accessibility helpers ----------------------------------------------
   function onKeyDown(e: KeyboardEvent) {
     if (e.key === "Escape") close();
   }
 </script>
 
-<svelte:window on:keydown={onKeyDown} />
+<svelte:window onkeydown={onKeyDown} />
 
-<!-- =========================================================================
-  Section wrapper (Home - Section 3)
-============================================================================= -->
 <section id="projects" class="section-spacing" aria-labelledby="projects-title">
   <div class="section-shell">
-    <!-- Scroll animation wrapper (extra points) -->
     <InView>
-      <!-- -------------------------------------------------------------------
-        Section header
-      -------------------------------------------------------------------- -->
       <header class="mb-8">
         <h2 id="projects-title" class="text-2xl md:text-3xl font-semibold">
           {$t("projectsSection.title")}
@@ -69,9 +53,6 @@
         </p>
       </header>
 
-      <!-- -------------------------------------------------------------------
-        Projects grid (interactive cards)
-      -------------------------------------------------------------------- -->
       {#if !projects.length}
         <p class="text-slate-300">{$t("projectsSection.empty")}</p>
       {:else}
@@ -80,8 +61,8 @@
             <button
               type="button"
               class="group text-left rounded-2xl border border-teal-800 bg-[color:var(--surface)]/40 p-5 transition-all duration-200 ease-out backdrop-blur-sm shadow-sm hover:shadow-xl transform-gpu hover:-translate-y-1 hover:border-[color:var(--accent-weak)]/60 hover:bg-[color:var(--surface)]/70 focus:outline-none focus:ring-2 focus:ring-[color:var(--accent)]/60"
-              on:click={() => openProject(p)}
-              aria-label={`${p.title} — ${$t("projectsSection.ctaView")}`}
+              onclick={() => openProject(p)}
+              aria-label={`${p.title} - ${$t("projectsSection.ctaView")}`}
             >
               <div class="flex items-start gap-4">
                 {#if p.icon}
@@ -125,7 +106,7 @@
                     <span
                       class="cta-underline text-sm font-medium text-[color:var(--accent)] inline-flex items-center gap-2 transition-colors duration-200"
                     >
-                      {$t("projectsSection.ctaView")} →
+                      {$t("projectsSection.ctaView")} &rarr;
                     </span>
                   </div>
                 </div>
@@ -137,24 +118,18 @@
     </InView>
   </div>
 
-  <!-- =========================================================================
-    Modal (Project details)
-  ============================================================================= -->
   {#if selected}
-    <!-- Backdrop (click to close). sr-only text to avoid a11y warnings. -->
     <button
       type="button"
       class="fixed inset-0 bg-black/70 z-40 backdrop-blur-sm"
-      on:click={close}
+      onclick={close}
       aria-label={$t("projectsSection.close")}
       transition:backdrop
     >
       <span class="sr-only">{$t("projectsSection.close")}</span>
     </button>
 
-    <!-- Dialog container -->
     <div class="fixed inset-0 z-50 flex items-center justify-center p-4">
-      <!-- Dialog -->
       <div
         class="w-full max-w-xl rounded-2xl border border-white/10 bg-[color:var(--surface)] shadow-2xl ring-1 ring-black/30 overflow-hidden"
         role="dialog"
@@ -162,7 +137,6 @@
         aria-label={$t("projectsSection.modalTitle")}
         transition:clipReveal
       >
-        <!-- Modal header -->
         <header
           class="px-5 py-4 border-b border-white/10 flex justify-between gap-4"
         >
@@ -188,14 +162,13 @@
           <button
             type="button"
             class="modal-cta icon p-1 text-white focus:outline-none focus:ring-2 focus:ring-[color:var(--accent)]/60"
-            on:click={close}
+            onclick={close}
             aria-label={$t("projectsSection.close")}
           >
-            ✕
+            &times;
           </button>
         </header>
 
-        <!-- Modal body -->
         <div class="px-5 py-5 space-y-5">
           <p class="text-slate-200 leading-relaxed">
             {selected.details}
@@ -246,12 +219,11 @@
           </div>
         </div>
 
-        <!-- Modal footer -->
         <footer class="px-5 py-4 border-t border-white/10 flex justify-end">
           <button
             type="button"
             class="modal-cta px-4 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-[color:var(--accent)]/60"
-            on:click={close}
+            onclick={close}
           >
             {$t("projectsSection.close")}
           </button>
@@ -260,4 +232,3 @@
     </div>
   {/if}
 </section>
-

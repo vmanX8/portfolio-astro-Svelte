@@ -1,177 +1,71 @@
 <script lang="ts">
-  /**
-   * NavBar Component
-   *
-   * This is the top navigation bar that appears on every page.
-   * It handles:
-   * - Desktop navigation menu
-   * - Mobile hamburger menu (slide-out drawer)
-   * - Language switching (EN/GR)
-   * - Responsive design
-   *
-   * Key Features:
-   * - Uses Astro's View Transitions for smooth page navigation
-   * - Mobile menu slides in from the right
-   * - Keyboard support (ESC key closes menu)
-   * - Accessible (ARIA attributes, semantic HTML)
-   */
-
-  // Import the translation function and locale store from svelte-i18n
-  // _ is the translation function, we rename it to 't' for clarity
-  import { _, locale } from "svelte-i18n";
-
-  // Import function to set up internationalization
+  import { _ } from "svelte-i18n";
   import { setupI18n } from "../lib/i18n/i18n";
-
-  // Import the Locale type (either "en" or "gr")
   import type { Locale } from "../lib/i18n/messages";
-
-  // Import Svelte lifecycle hooks
-  import { onDestroy, onMount } from "svelte";
-
-  // Import Astro's navigate function for smooth page transitions
   import { navigate } from "astro:transitions/client";
+  import { normalizePath } from "./ui/navLinks";
 
-  // Shared nav link definitions and locale-aware path helper
-  import { navLinks, normalizePath } from "./ui/navLinks";
+  type NavItem = { href: string; labelKey: string };
 
-  // Initialize i18n system - detects language from URL and sets up translations
-  setupI18n();
+  type Props = {
+    locale?: Locale;
+    navItems?: NavItem[];
+    languageSwitch?: { en: string; gr: string };
+    homeHref?: string;
+  };
 
-  // Create a shorthand for the translation function
-  const t = _;
+  let {
+    locale = "en",
+    navItems = [],
+    languageSwitch = { en: "/", gr: "/gr" },
+    homeHref = "/",
+  }: Props = $props();
 
-  // === STATE ===
-  // Track whether the mobile menu is open or closed
-  // This is a reactive variable - when it changes, the UI updates automatically
-  let open = false;
-  let currentLocale: Locale = "en";
-  let activePath = "/";
-
-  // Initialize active path immediately on the client to avoid a flash of the wrong active link
-  if (typeof window !== "undefined") {
-    activePath = normalizePath(window.location.pathname);
-  }
-
-  // Keep local copy of the current locale so links stay in the active language
-  const unsubscribe = locale.subscribe((value) => {
-    currentLocale = (value as Locale) ?? "en";
+  $effect.pre(() => {
+    setupI18n(locale);
   });
 
-  /**
-   * refreshActivePath - Sync the active path with the current URL.
-   *
-   * Runs on mount and after client-side navigations so the correct nav item is highlighted.
-   */
+  const t = _;
+  let open = $state(false);
+  let activePath = $state("/");
+  const isBrowser = typeof window !== "undefined";
+
   function refreshActivePath() {
     if (typeof window === "undefined") return;
     activePath = normalizePath(window.location.pathname);
   }
 
-  /**
-   * isActiveLink - Check if a nav item should be marked active.
-   *
-   * @param path - Base route (unlocalized), e.g. "/about"
-   */
-  function isActiveLink(path: string) {
-    return normalizePath(path) === activePath;
+  function isActiveLink(href: string) {
+    return normalizePath(href) === activePath;
   }
 
-  // === FUNCTIONS ===
-
-  /**
-   * setLang - Switch the website language
-   *
-   * How it works:
-   * 1. Closes mobile menu if open
-   * 2. Calculates the new URL with correct language prefix
-   * 3. Uses Astro's navigate() to smoothly transition to new page
-   *
-   * Examples:
-   * - If on "/about" and switch to Greek → navigate to "/gr/about"
-   * - If on "/gr/projects" and switch to English → navigate to "/projects"
-   *
-   * @param l - The locale to switch to ("en" or "gr")
-   */
   function setLang(l: Locale) {
-    // Close mobile menu when language is selected
     open = false;
-
-    // Get the current URL path (e.g., "/about" or "/gr/projects")
-    const currentPath = window.location.pathname;
-
-    // Remove any existing locale prefix (/en or /gr) from the path
-    // Result: "/about" becomes "/about", "/gr/about" becomes "/about"
-    const pathWithoutLocale = currentPath.replace(/^\/(en|gr)/, "") || "/";
-
-    // Add the new locale prefix
-    // English stays at root ("/about"), Greek gets /gr prefix ("/gr/about")
-    const newPath =
-      l === "en" ? pathWithoutLocale : `/${l}${pathWithoutLocale}`;
-
-    // Navigate to the new URL using Astro's View Transitions
-    // This provides a smooth fade animation instead of a hard page reload
-    navigate(newPath);
+    const target = l === "en" ? languageSwitch.en : languageSwitch.gr;
+    navigate(target);
   }
 
-  /**
-   * toggle - Open/close the mobile menu
-   *
-   * This function flips the 'open' state between true and false
-   */
   function toggle() {
     open = !open;
   }
 
-  /**
-   * close - Close the mobile menu
-   *
-   * Called when:
-   * - User clicks outside the menu (on backdrop)
-   * - User clicks a menu link
-   * - User presses ESC key
-   */
   function close() {
     open = false;
   }
 
-  /**
-   * onKeyDown - Handle keyboard events
-   *
-   * Accessibility feature: allows users to close menu with ESC key
-   * This is important for keyboard-only users
-   *
-   * @param e - The keyboard event
-   */
   function onKeyDown(e: KeyboardEvent) {
     if (e.key === "Escape") close();
   }
 
-  /**
-   * localizedHref - build a link that preserves the current locale
-   *
-   * @param path - the base path (e.g., "/about")
-   * @returns the path prefixed with /gr when in Greek mode
-   */
-  function localizedHref(path: string) {
-    const prefix = currentLocale === "gr" ? "/gr" : "";
-    if (path === "/") return prefix || "/";
-    return `${prefix}${path}`;
-  }
-
-  // Set up global keyboard listener (only on client-side)
-  // We check for 'window' because this code also runs on the server during build
-  if (typeof window !== "undefined") {
-    // Listen for all keyboard events on the window
+  $effect(() => {
+    if (!isBrowser) return;
     window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  });
 
-    // Clean up: remove the listener when component is destroyed
-    // This prevents memory leaks
-    onDestroy(() => window.removeEventListener("keydown", onKeyDown));
-  }
+  $effect(() => {
+    if (!isBrowser) return;
 
-  // Track navigation changes so active link highlighting stays in sync
-  onMount(() => {
     const handleAfterSwap = () => refreshActivePath();
     const handlePageLoad = () => refreshActivePath();
     const handlePopState = () => refreshActivePath();
@@ -187,9 +81,6 @@
       window.removeEventListener("popstate", handlePopState);
     };
   });
-
-  // Clean up the locale subscription when component is destroyed
-  onDestroy(unsubscribe);
 </script>
 
 <nav
@@ -197,21 +88,20 @@
 >
   <div class="max-w-5xl mx-auto flex items-center justify-between px-4 py-4">
     <a
-      href={localizedHref("/")}
+      href={homeHref}
       class="text-white text-2xl font-semibold tracking-wide">Portfolio</a
     >
 
-    <!-- Desktop menu -->
     <div class="hidden md:flex items-center gap-8">
       <ul class="flex items-center gap-8">
-        {#each navLinks as link}
+        {#each navItems as link}
           <li>
             <a
-              href={localizedHref(link.path)}
+              href={link.href}
               class={`transition-colors duration-150 hover:text-[color:var(--accent)] ${
-                isActiveLink(link.path) ? "nav-active font-semibold" : "text-white"
+                isActiveLink(link.href) ? "nav-active font-semibold" : "text-white"
               }`}
-              aria-current={isActiveLink(link.path) ? "page" : undefined}
+              aria-current={isActiveLink(link.href) ? "page" : undefined}
             >
               {$t(link.labelKey)}
             </a>
@@ -224,39 +114,37 @@
         <button
           type="button"
           class={`px-2 py-1 text-sm rounded border border-[color:var(--accent-weak)] transition-shadow duration-200 ${
-            currentLocale === "en"
+            locale === "en"
               ? "lang-active"
               : "text-white bg-white/5 hover:bg-[color:var(--accent-glow-hover)] hover:shadow-[var(--accent-glow-hover)]"
           }`}
-          on:click={() => setLang("en")}
-          aria-pressed={currentLocale === "en"}
+          onclick={() => setLang("en")}
+          aria-pressed={locale === "en"}
         >
           EN
         </button>
         <button
           type="button"
           class={`px-2 py-1 text-sm rounded border border-[color:var(--accent-weak)] transition-shadow duration-200 ${
-            currentLocale === "gr"
+            locale === "gr"
               ? "lang-active"
               : "text-white bg-white/5 hover:bg-[color:var(--accent-glow-hover)] hover:shadow-[var(--accent-glow-hover)]"
           }`}
-          on:click={() => setLang("gr")}
-          aria-pressed={currentLocale === "gr"}
+          onclick={() => setLang("gr")}
+          aria-pressed={locale === "gr"}
         >
           GR
         </button>
       </div>
     </div>
 
-    <!-- Mobile hamburger -->
     <button
       type="button"
       class="md:hidden inline-flex items-center justify-center rounded border border-gray-600 p-2 text-white hover:bg-gray-700"
       aria-label={$t("nav.openMenu")}
       aria-expanded={open}
-      on:click={toggle}
+      onclick={toggle}
     >
-      <!-- icon -->
       <svg
         class="h-5 w-5"
         viewBox="0 0 24 24"
@@ -274,11 +162,10 @@
   </div>
 
   {#if open}
-    <!-- Backdrop -->
     <button
       type="button"
       class="fixed inset-0 bg-black/70 md:hidden z-40"
-      on:click={close}
+      onclick={close}
       aria-label={$t("nav.closeMenu")}
     >
       <span class="sr-only">
@@ -286,7 +173,6 @@
       </span>
     </button>
 
-    <!-- Slide panel -->
     <div
       class="fixed right-0 top-0 h-full w-[85%] max-w-sm md:hidden z-50
              bg-[color:var(--surface)]/95 backdrop-blur-md text-white border-l border-white/10 shadow-2xl"
@@ -299,7 +185,7 @@
           type="button"
           class="rounded border border-gray-600 p-2 text-white hover:bg-white/10"
           aria-label={$t("nav.closeMenu")}
-          on:click={close}
+          onclick={close}
         >
           <svg
             class="h-5 w-5"
@@ -319,17 +205,17 @@
 
       <div class="px-4 py-4 bg-[color:var(--background)]">
         <ul class="flex flex-col gap-2">
-          {#each navLinks as link}
+          {#each navItems as link}
             <li>
               <a
-                href={localizedHref(link.path)}
+                href={link.href}
                 class={`block rounded-lg px-3 py-2 hover:bg-white/10 ${
-                  isActiveLink(link.path)
+                  isActiveLink(link.href)
                     ? "nav-active-mobile font-semibold"
                     : "text-white"
                 }`}
-                aria-current={isActiveLink(link.path) ? "page" : undefined}
-                on:click={close}
+                aria-current={isActiveLink(link.href) ? "page" : undefined}
+                onclick={close}
               >
                 {$t(link.labelKey)}
               </a>
@@ -343,24 +229,24 @@
             <button
               type="button"
               class={`flex-1 px-3 py-2 text-sm rounded border border-[color:var(--accent-weak)] transition-shadow duration-200 ${
-                currentLocale === "en"
+                locale === "en"
                   ? "lang-active"
                   : "text-white bg-white/5 hover:bg-[color:var(--accent-glow)] shadow-[var(--accent-glow)] hover:shadow-[var(--accent-glow-hover)]"
               }`}
-              on:click={() => setLang("en")}
-              aria-pressed={currentLocale === "en"}
+              onclick={() => setLang("en")}
+              aria-pressed={locale === "en"}
             >
               EN
             </button>
             <button
               type="button"
               class={`flex-1 px-3 py-2 text-sm rounded border border-[color:var(--accent-weak)] transition-shadow duration-200 ${
-                currentLocale === "gr"
+                locale === "gr"
                   ? "lang-active"
                   : "text-white bg-white/5 hover:bg-[color:var(--accent-glow)] shadow-[var(--accent-glow)] hover:shadow-[var(--accent-glow-hover)]"
               }`}
-              on:click={() => setLang("gr")}
-              aria-pressed={currentLocale === "gr"}
+              onclick={() => setLang("gr")}
+              aria-pressed={locale === "gr"}
             >
               GR
             </button>

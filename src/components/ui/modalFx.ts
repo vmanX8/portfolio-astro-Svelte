@@ -1,9 +1,7 @@
 import { cubicIn, cubicOut } from "svelte/easing";
 import type { TransitionConfig } from "svelte/transition";
 
-/**
- * backdrop - Simple fade for overlays/backdrops
- */
+/** Simple fade for overlays/backdrops. */
 export function backdrop(
   node: Element,
   { delay = 0, duration = 160 } = {}
@@ -19,15 +17,11 @@ export function backdrop(
   };
 }
 
-/**
- * clipReveal - Mask wipe effect (top-to-bottom) with small translate
- * Respects prefers-reduced-motion by falling back to a simple fade/slide
- */
+/** Clip reveal with reduced-motion fallback. */
 export function clipReveal(
-  node: Element,
+  _node: Element,
   { delay = 0, duration = 260 } = {}
 ): TransitionConfig {
-  // Respect user preference for reduced motion
   if (typeof window !== "undefined" &&
       window.matchMedia &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -44,9 +38,8 @@ export function clipReveal(
     duration,
     easing: cubicOut,
     css: (t: number) => {
-      // animate clip-path inset from 100% -> 0% (reveals from top)
       const insetTop = (1 - t) * 100;
-      const y = (1 - t) * 6; // small translate for depth
+      const y = (1 - t) * 6;
       return `opacity: ${t}; clip-path: inset(${insetTop}% 0 0 0); transform: translateY(${y}px);`;
     },
   };

@@ -1,36 +1,8 @@
 /**
- * Projects Content (Section 3 Data)
- *
- * @file Provides project data in a maintainable shape: a shared `baseProjects`
- * (non-translatable fields like `demoUrl`, `repoUrl`, `tech`, `id`) plus a
- * `localized` map containing translatable text per locale (`title`, `summary`,
- * `details`). The final `projectsByLanguage` export composes these together.
- *
- * Usage:
- * - Import `projectsByLanguage` and select by locale (e.g. `projectsByLanguage['en']`).
- *
- * - To add a project safely:
- *   1) Add a new entry to `baseProjects` with a stable `id`, `tech[]`, and any
- *      shared URLs. Keep `id` lowercase and hyphenated (e.g. `my-project`).
- *   2) Add localized texts under `localized.<locale>.<id>` with `title`,
- *      `summary`, and `details`.
- *   2b) Add a shared `icon` path to `baseProjects` when you have an SVG to show.
- *      Place SVGs under `public/assets/projects/` using the project `id` (e.g.
- *      `/assets/projects/<id>.svg`).
- *   3) The `projectsByLanguage` composer will merge them; run the dev server or
- *      `pnpm/npm run dev` and the TypeScript compiler will catch shape errors.
- * - Prefer keeping non-translatable data in `baseProjects` to avoid duplication.
- * - If you need to add or remove locales, update `localized` and ensure mappings
- *   for the new locale include every project's `id`.
- *
- * Design notes:
- * - Single source of truth for shared fields reduces accidental data drift.
- * - Localized texts are intentionally kept separate for easy translation work.
+ * Projects content split into shared fields and localized text.
  */
 
 import type { Locale } from "../i18n/messages";
-
-// === TYPE DEFINITION ===
 
 export type Project = {
   id: string;
@@ -38,36 +10,33 @@ export type Project = {
   summary: string;
   details: string;
   tech: string[];
-  /** URL path to an SVG icon (served from `public/`) - localized per locale */
+  /** SVG icon path under `public/assets/projects/`. */
   icon?: string;
   demoUrl?: string;
   repoUrl?: string;
 };
 
-// Shared (non-localized) project fields
 type ProjectBase = {
   id: string;
   tech: string[];
-  /** Shared SVG path for the project icon (served from `public/assets/projects/<id>.svg`) */
+  /** SVG icon path under `public/assets/projects/`. */
   icon?: string;
   demoUrl?: string;
   repoUrl?: string;
 };
 
-// Localized text for a project
 type LocalizedText = {
   title: string;
   summary: string;
   details: string;
 };
 
-// === SHARED BASE PROJECTS ===
 const baseProjects: ProjectBase[] = [
   {
     id: "portfolio",
     tech: ["Astro", "Svelte", "Tailwind", "TypeScript"],
     icon: "/assets/projects/portfolio.svg",
-    repoUrl: "https://github.com/vmanX8/Portfolio-Astro-Svelte-Tailwind",
+    repoUrl: "https://github.com/vmanX8/portfolio-astro-Svelte",
   },
   {
     id: "snakes-ladders",
@@ -85,14 +54,13 @@ const baseProjects: ProjectBase[] = [
   },
 ];
 
-// === LOCALIZED TEXTS ===
 const localized: Record<Locale, Record<string, LocalizedText>> = {
   en: {
     "portfolio": {
       title: "Portfolio Website",
-      summary: "My personal portfolio built with Astro and Svelte.",
+      summary: "Modern, responsive portfolio built with Astro, Svelte, and Tailwind CSS.",
       details:
-        "This project focuses on performance, clean structure and responsive UI. Astro is used for page rendering and Svelte for interactive components.",
+        "A modular portfolio application built with Astro, Svelte, TypeScript, and Tailwind CSS. It features multilingual support (EN/GR), scroll-based animations, and SEO-friendly structure. The About section consumes data from an Astro API route that simulates backend-driven content, demonstrating API integration in a static front-end context.",
     },
     "snakes-ladders": {
       title: "Snakes & Ladders Game",
@@ -111,9 +79,9 @@ const localized: Record<Locale, Record<string, LocalizedText>> = {
   gr: {
     "portfolio": {
       title: "Portfolio Website",
-      summary: "Το προσωπικό μου portfolio με Astro και Svelte.",
+      summary: "Σύγχρονο και responsive portfolio με Astro, Svelte και Tailwind CSS.",
       details:
-        "Το project δίνει έμφαση στην απόδοση, στη σωστή δομή και στο responsive UI. Το Astro χρησιμοποιείται για τις σελίδες και το Svelte για διαδραστικά στοιχεία.",
+        "Εφαρμογή υλοποιημένη με Astro, Svelte, TypeScript και Tailwind CSS. Υποστηρίζει πολλαπλές γλώσσες (EN/GR), animations και SEO-friendly δομή. Το section About αντλεί δεδομένα από Astro API route που προσομοιώνει το backend, αναδεικνύοντας την ενσωμάτωση API σε στατικό front-end περιβάλλον.",
     },
     "snakes-ladders": {
       title: "Snakes & Ladders Game",
@@ -130,7 +98,6 @@ const localized: Record<Locale, Record<string, LocalizedText>> = {
   },
 };
 
-// === COMPOSE FINAL PROJECTS ===
 export const projectsByLanguage: Record<Locale, Project[]> = {
   en: baseProjects.map((b) => ({
     ...b,
