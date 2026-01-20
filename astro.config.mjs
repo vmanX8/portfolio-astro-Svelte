@@ -4,10 +4,12 @@ import svelte from "@astrojs/svelte"
 import tailwindcss from "@tailwindcss/vite";
 import node from "@astrojs/node";
 
+import vercel from "@astrojs/vercel";
+
 export default defineConfig({
   integrations: [svelte()],
   output: "server",
-  adapter: node({ mode: "standalone" }),
+  adapter: vercel(),
   devToolbar: {
     enabled: false,
   },
