@@ -11,9 +11,9 @@ export const aboutContent = {
 		paragraphs: [
 			"Front-End Engineer in transition, with a strong engineering foundation and hands-on experience exploring React and modern web technologies. ",
 
-			"Currently working as a Presales/Field Application Engineer, where I™??ve developed a sharp problem-solving mindset, a deep understanding of technical requirements, and the ability to translate user needs into practical solutions.",
+			"Currently working as a Presales/Field Application Engineer, where I've developed a sharp problem-solving mindset, a deep understanding of technical requirements, and the ability to translate user needs into practical solutions.",
 
-			"I™??m actively building my skills in front-end development™??focusing on React, component design, UI/UX fundamentals, and clean, maintainable code. My background in Electrical & Electronic Engineering gives me a structured, analytical approach, while my customer-facing experience helps me think from the user™??s perspective."
+			"I'm actively building my skills in front-end development focusing on React, component design, UI/UX fundamentals, and clean, maintainable code. My background in Electrical & Electronic Engineering gives me a structured, analytical approach, while my customer-facing experience helps me think from the user's perspective."
 		]
 	},
 
