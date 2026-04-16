@@ -14,11 +14,21 @@
         raw = raw.replace(/<\?xml.*?\?>\s*/i, "");
 
         raw = raw.replace(
-            /fill=("|')(?!none)(.*?)("|')/gi,
+            /fill\s*=\s*("|')(?!none)(.*?)\1/gi,
             'fill="currentColor"',
         );
 
-        raw = raw.replace(/stroke=("|')(.*?)("|')/gi, 'stroke="currentColor"');
+        raw = raw.replace(
+            /stroke\s*=\s*("|')(?!none)(.*?)\1/gi,
+            'stroke="currentColor"',
+        );
+
+        raw = raw.replace(/style=("|')(.*?)\1/gi, (match, quote, style) => {
+            const updatedStyle = style
+                .replace(/fill\s*:\s*[^;]+;?/gi, "fill:currentColor;")
+                .replace(/stroke\s*:\s*[^;]+;?/gi, "stroke:currentColor;");
+            return `style=${quote}${updatedStyle}${quote}`;
+        });
 
         const widthMatch = raw.match(/\swidth=("|')(.*?)("|')/i);
         const heightMatch = raw.match(/\sheight=("|')(.*?)("|')/i);

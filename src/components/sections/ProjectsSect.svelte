@@ -21,9 +21,7 @@
 
   let selected = $state<Project | null>(null);
 
-  const lang = $derived(
-    ($localeStore === "gr" ? "gr" : "en") as "en" | "gr",
-  );
+  const lang = $derived(($localeStore === "gr" ? "gr" : "en") as "en" | "gr");
   const projects = $derived(projectsByLanguage[lang]);
 
   function openProject(p: Project) {
@@ -32,6 +30,28 @@
 
   function close() {
     selected = null;
+  }
+
+  function getProjectSpanClass(index: number) {
+    const remainder = projects.length % 3;
+    const itemsInLastRow = remainder === 0 ? 3 : remainder;
+    const lastRowStart = projects.length - itemsInLastRow;
+
+    const baseSpan = "col-span-6 md:col-span-2";
+
+    if (index < lastRowStart) {
+      return baseSpan;
+    }
+
+    if (itemsInLastRow === 1) {
+      return "col-span-6";
+    }
+
+    if (itemsInLastRow === 2) {
+      return "col-span-6 md:col-span-3";
+    }
+
+    return baseSpan;
   }
 
   function onKeyDown(e: KeyboardEvent) {
@@ -56,11 +76,11 @@
       {#if !projects.length}
         <p class="text-slate-300">{$t("projectsSection.empty")}</p>
       {:else}
-        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {#each projects as p (p.id)}
+        <div class="grid gap-6 grid-cols-6">
+          {#each projects as p, index (p.id)}
             <button
               type="button"
-              class="group text-left rounded-2xl border border-teal-800 bg-[color:var(--surface)]/40 p-5 transition-all duration-200 ease-out backdrop-blur-sm shadow-sm hover:shadow-xl transform-gpu hover:-translate-y-1 hover:border-[color:var(--accent-weak)]/60 hover:bg-[color:var(--surface)]/70 focus:outline-none focus:ring-2 focus:ring-[color:var(--accent)]/60"
+              class={`group text-left rounded-2xl border border-teal-800 bg-[color:var(--surface)]/40 p-5 h-full transition-all duration-200 ease-out backdrop-blur-sm shadow-sm hover:shadow-xl transform-gpu hover:-translate-y-1 hover:border-[color:var(--accent-weak)]/60 hover:bg-[color:var(--surface)]/70 focus:outline-none focus:ring-2 focus:ring-[color:var(--accent)]/60 ${getProjectSpanClass(index)}`}
               onclick={() => openProject(p)}
               aria-label={`${p.title} - ${$t("projectsSection.ctaView")}`}
             >
