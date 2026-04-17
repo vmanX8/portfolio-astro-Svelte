@@ -2,7 +2,7 @@
  * Localized project copy by locale.
  */
 
-import type { LocalizedProjectText } from "./projectTypes";
+import type { LocalizedProjectText } from "./types";
 
 export const projectTextByLanguage: LocalizedProjectText = {
   en: {

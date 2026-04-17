@@ -2,15 +2,17 @@
   import { _, locale as localeStore } from "svelte-i18n";
   import { setupI18n } from "../../lib/i18n/i18n";
   import type { Locale } from "../../lib/i18n/messages";
-  import { getFeaturedProjectsByLanguage } from "../../lib/content/projects";
+  import { getFeaturedProjectsByLanguage } from "../../lib/content/projects/index";
+  import type { Project } from "../../lib/content/projects/index";
   import InView from "../ui/InView.svelte";
   import ProjectIcon from "../ui/ProjectIcon.svelte";
 
   type Props = {
     locale?: Locale;
+    projects?: Project[];
   };
 
-  let { locale = "en" }: Props = $props();
+  let { locale = "en", projects: projectsProp }: Props = $props();
 
   $effect.pre(() => {
     setupI18n(locale);
@@ -18,7 +20,9 @@
   const t = _;
 
   const lang = $derived(($localeStore === "gr" ? "gr" : "en") as "en" | "gr");
-  const featuredProjects = $derived(getFeaturedProjectsByLanguage(lang));
+  const featuredProjects = $derived(
+    projectsProp ?? getFeaturedProjectsByLanguage(lang),
+  );
   const projectsHref = $derived(lang === "gr" ? "/gr/projects" : "/projects");
 
   function getProjectHref(projectId: string) {
@@ -29,7 +33,9 @@
 <section id="projects" class="section-spacing" aria-labelledby="projects-title">
   <div class="section-shell">
     <InView>
-      <header class="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+      <header
+        class="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between"
+      >
         <div>
           <h2 id="projects-title" class="text-2xl md:text-3xl font-semibold">
             {$t("projectsSection.title")}

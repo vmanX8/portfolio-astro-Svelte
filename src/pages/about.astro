@@ -4,12 +4,28 @@ import NavBarShell from "../components/NavBarShell.astro";
 import AboutPage from "../components/pages/AboutPage.svelte";
 import { tSeo } from "../lib/i18n/server";
 import type { Locale } from "../lib/i18n/messages";
+import { aboutPageContent } from "../lib/content/about";
+import { currentFocusByLanguage } from "../lib/content/about/currentFocus";
+import { toolkitByLanguage } from "../lib/content/about/toolkit";
 
 const lang = (Astro.currentLocale as Locale) || "en";
 const seo = tSeo(lang);
+const pageCopy = aboutPageContent[lang];
+const currentFocus = currentFocusByLanguage[lang];
+const toolkit = toolkitByLanguage[lang];
 ---
 
-<BaseLayout title={seo.aboutTitle} description={seo.aboutDescription} lang={lang}>
+<BaseLayout
+    title={seo.aboutTitle}
+    description={seo.aboutDescription}
+    lang={lang}
+>
     <NavBarShell />
-    <AboutPage client:load locale={lang} />
+    <AboutPage
+        client:load
+        locale={lang}
+        copy={pageCopy}
+        currentFocus={currentFocus}
+        toolkit={toolkit}
+    />
 </BaseLayout>

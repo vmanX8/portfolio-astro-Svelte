@@ -2,7 +2,7 @@
  * Shared project content types.
  */
 
-import type { Locale } from "../i18n/messages";
+import type { Locale } from "../../i18n/messages";
 
 export type Project = {
   id: string;

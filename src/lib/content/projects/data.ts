@@ -2,7 +2,7 @@
  * Shared, language-independent project data.
  */
 
-import type { ProjectBase } from "./projectTypes";
+import type { ProjectBase } from "./types";
 
 export const projectBaseList: ProjectBase[] = [
   {

@@ -25,7 +25,9 @@ src/
 - layouts/ `BaseLayout.astro` (SEO, head tags, view transitions)
 - lib/
   - i18n/ `i18n.ts`, `messages.ts`, `server.ts`
-  - content/ `about.ts`, `projects.ts`, `projectData.ts`, `projectLocales.ts`, `projectTypes.ts`, `currentFocus.ts`, `toolkit.ts`
+  - content/
+    - about/ `index.ts`, `currentFocus.ts`, `toolkit.ts`
+    - projects/ `index.ts`, `data.ts`, `locales.ts`, `types.ts`
 - pages/ Astro pages (`/`, `/about`, `/projects`, `/contact`) + API endpoints (`/api/about/*`)
 
 public/
@@ -66,19 +68,19 @@ public/
 - Shared transitions for overlays and modals (`backdrop`, `clipReveal`).
 - Includes a reduced-motion fallback.
 
-### `projects.ts`
+### `content/projects`
 - Public project content API used by the project components.
-- Builds localized project arrays from `projectData.ts` and `projectLocales.ts`.
+- Builds localized project arrays from `projects/data.ts` and `projects/locales.ts`.
 - Exposes helpers for latest-first and featured project lists.
 - To add a project:
-  1. Add a base entry in `projectData.ts` (id, icon, links, tech)
-  2. Add localized strings in `projectLocales.ts` (EN/GR)
+  1. Add a base entry in `src/lib/content/projects/data.ts` (id, icon, links, tech)
+  2. Add localized strings in `src/lib/content/projects/locales.ts` (EN/GR)
   3. Drop the icon into `public/assets/projects/<id>.svg`
 
 ### About content APIs
 - `/api/about/current?lang=en|gr` serves the current focus panel.
 - `/api/about/toolkit?lang=en|gr` serves the toolkit stack.
-- Source content lives in `src/lib/content/currentFocus.ts` and `src/lib/content/toolkit.ts`.
+- Source content lives in `src/lib/content/about/currentFocus.ts` and `src/lib/content/about/toolkit.ts`.
 - The About page keeps local fallback content so the UI still renders if an API request fails.
 
 ---

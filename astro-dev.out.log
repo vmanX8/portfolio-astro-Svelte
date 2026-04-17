@@ -1,22 +1,26 @@
 
 > wportfolio@0.0.1 dev
-> astro dev --host 127.0.0.1 --port 4322
+> astro dev --host 127.0.0.1 --port 4323
 
-[2m13:25:22[22m [34m[types][39m Generated [2m2ms[22m
-[2m13:25:22[22m [34m[content][39m Syncing content
-[2m13:25:22[22m [34m[content][39m Astro config changed
-[2m13:25:22[22m [34m[content][39m Clearing content store
-[2m13:25:22[22m [34m[content][39m Synced content
+[2m14:00:26[22m [34m[types][39m Generated [2m2ms[22m
+[2m14:00:26[22m [34m[content][39m Syncing content
+[2m14:00:26[22m [34m[content][39m Astro config changed
+[2m14:00:26[22m [34m[content][39m Clearing content store
+[2m14:00:26[22m [34m[content][39m Synced content
+[2m14:00:26[22m [34m[vite][39m Forced re-optimization of dependencies
 
-[42m[1m astro [22m[49m [32mv5.16.6[39m [2mready in[22m 1306 [2mms[22m
+[42m[1m astro [22m[49m [32mv5.16.6[39m [2mready in[22m 1270 [2mms[22m
 
-[2m┃[22m Local    [36mhttp://127.0.0.1:4322/[39m
+[2m┃[22m Local    [36mhttp://127.0.0.1:4323/[39m
 
-[2m13:25:22[22m [32mwatching for file changes...[39m
-[2m13:25:39[22m [34m[200][39m /api/about/toolkit [2m49ms[22m
-[2m13:25:40[22m [34m[200][39m /about [2m220ms[22m
-[2m13:25:40[22m [34m[200][39m /gr/about [2m223ms[22m
-[2m13:28:27[22m [34m[200][39m /contact [2m332ms[22m
-[2m13:28:28[22m [34m[200][39m /about [2m333ms[22m
-[2m13:28:28[22m [34m[200][39m /projects [2m103ms[22m
-[2m13:28:28[22m [34m[200][39m / [2m37ms[22m
+[2m14:00:26[22m [32mwatching for file changes...[39m
+[2m14:00:48[22m [34m[200][39m /about [2m248ms[22m
+[2m14:00:48[22m [34m[200][39m /projects [2m83ms[22m
+[2m14:00:49[22m [34m[200][39m / [2m30ms[22m
+[2m14:01:42[22m [34m[200][39m /projects [2m236ms[22m
+[2m14:01:42[22m [34m[200][39m / [2m302ms[22m
+[2m14:01:42[22m [34m[200][39m /about [2m166ms[22m
+[2m14:36:22[22m [34m[200][39m /about [2m252ms[22m
+[2m14:36:22[22m [34m[200][39m /projects [2m260ms[22m
+[2m14:36:22[22m [34m[200][39m / [2m239ms[22m
+[2m14:43:07[22m [34m[200][39m / [2m151ms[22m
