@@ -44,45 +44,53 @@ export const messages = {
       contact: "Contact",
     },
 
-	hero: {
-		badge: "Portfolio",
-		titleHi: "Hi, I'm",
-		name: "Vangelis",
-		role: "Frontend Engineer",
-		tagline:
-			"“Good front-end is where engineering discipline meets human experience.”",
-		ctaProjects: "See my work", 
-		ctaContact: "Let’s build something",
-	},
+    hero: {
+      badge: "Portfolio",
+      titleHi: "Hi, I'm",
+      name: "Vangelis",
+      role: "Frontend Engineer",
+      tagline:
+        "“Good front-end is where engineering discipline meets human experience.”",
+      ctaProjects: "See my work",
+      ctaContact: "Let’s build something",
+    },
 
-		projectsSection: {
-		title: "Projects",
-		subtitle:
-			"A selection of work. Click a card to see details.",
-		ctaView: "View details",
-		modalTitle: "Project details",
-		close: "Close",
-		tags: "Tech",
-		links: "Links",
-		liveDemo: "Live demo",
-		sourceCode: "Source code",
-		empty: "No projects to show yet.",
-	},
+    projectsSection: {
+      title: "Projects",
+      subtitle:
+        "A selection of work. Click a card to see details.",
+      homeSubtitle:
+        "A quick preview of selected work. Open the projects page for the full carousel and details.",
+      loading: "Loading projects…",
+      loaded: "All projects are visible.",
+      ctaView: "View details",
+      viewAll: "View all projects",
+      viewProjectPage: "Open projects page",
+      previousProject: "Previous project",
+      nextProject: "Next project",
+      modalTitle: "Project details",
+      close: "Close",
+      tags: "Tech",
+      links: "Links",
+      liveDemo: "Live demo",
+      sourceCode: "Source code",
+      empty: "No projects to show yet.",
+    },
 
-	contactSection: {
-		title: "Contact",
-		subtitle:
-			"Send me a message.",
-		nameLabel: "Name",
-		emailLabel: "Email",
-		subjectLabel: "Subject",
-		messageLabel: "Message",
-		namePlaceholder: "Your name",
-		emailPlaceholder: "you@example.com",
-		subjectPlaceholder: "What is this about?",
-		messagePlaceholder: "Write your message…",
-		submit: "Send message",
-		},
+    contactSection: {
+      title: "Contact",
+      subtitle:
+        "Send me a message.",
+      nameLabel: "Name",
+      emailLabel: "Email",
+      subjectLabel: "Subject",
+      messageLabel: "Message",
+      namePlaceholder: "Your name",
+      emailPlaceholder: "you@example.com",
+      subjectPlaceholder: "What is this about?",
+      messagePlaceholder: "Write your message…",
+      submit: "Send message",
+    },
   },
   gr: {
 		seo: {
@@ -141,7 +149,15 @@ export const messages = {
 			title: "Projects",
 			subtitle:
 				"Μερικά δείγματα δουλειάς. Πατήστε στην κάρτα για λεπτομέρειες.",
+			homeSubtitle:
+				"Γρήγορη προεπισκόπηση επιλεγμένων Projects. Ανοίξτε τη σελίδα Projects για το πλήρες carousel και τις λεπτομέρειες.",
+			loading: "Φόρτωση Projects…",
+			loaded: "Όλα τα Projects εμφανίστηκαν.",
 			ctaView: "Λεπτομέρειες",
+			viewAll: "Δείτε όλα τα Projects",
+			viewProjectPage: "Άνοιγμα σελίδας Projects",
+			previousProject: "Προηγούμενο Project",
+			nextProject: "Επόμενο Project",
 			modalTitle: "Περισσότερα για το Project",
 			close: "Κλείσιμο",
 			tags: "Τεχνολογίες",

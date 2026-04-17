@@ -7,6 +7,9 @@
 
     let { src, alt, className = "" }: Props = $props();
 
+    const svgCache = new Map<string, string | null>();
+    const loadPromises = new Map<string, Promise<string | null>>();
+
     let svg = $state<string | null>(null);
     let error = $state(false);
     const isClient = typeof window !== "undefined";
@@ -53,27 +56,23 @@
         return raw;
     }
 
-    $effect(() => {
-        if (!isClient) return;
+    function getCachedSvg(source: string) {
+        if (svgCache.has(source)) return svgCache.get(source) ?? null;
+        return null;
+    }
 
-        let cancelled = false;
-        const controller = new AbortController();
-        const { signal } = controller;
+    async function fetchSvg(source: string, signal: AbortSignal) {
+        if (svgCache.has(source)) return svgCache.get(source) ?? null;
+        if (loadPromises.has(source)) return await loadPromises.get(source)!;
 
-        svg = null;
-        error = false;
-
-        const load = async () => {
+        const loadPromise = (async () => {
             try {
-                let requestedSrc = src;
+                let requestedSrc = source;
 
                 const match = requestedSrc.match(/\/assets\/projects\/(.+)$/i);
                 if (match) {
                     const normalized = `/assets/projects/${match[1].replace(/^(?:en|gr)\//i, "")}`;
                     if (normalized !== requestedSrc) {
-                        console.warn(
-                            `SvgInline: normalized icon path ${requestedSrc} -> ${normalized}`,
-                        );
                         requestedSrc = normalized;
                     }
                 }
@@ -88,30 +87,54 @@
                     );
                     if (m) {
                         const fallback = `/assets/projects/${m[1]}`;
-                        try {
-                            res = await fetch(fallback, {
-                                cache: "force-cache",
-                                signal,
-                            });
-                            if (res.ok) {
-                                const text = await res.text();
-                                if (!cancelled) svg = normalizeSvg(text);
-                                return;
-                            }
-                        } catch (e) {
-                            // fall through to throw below
-                        }
+                        res = await fetch(fallback, {
+                            cache: "force-cache",
+                            signal,
+                        });
                     }
+                }
 
-                    throw new Error("Failed to load SVG");
+                if (!res.ok) {
+                    return null;
                 }
 
                 const text = await res.text();
-                if (!cancelled) svg = normalizeSvg(text);
-            } catch (e) {
-                if (cancelled) return;
-                error = true;
-                console.error("SvgInline: could not load", src, e);
+                return normalizeSvg(text);
+            } catch {
+                return null;
+            }
+        })();
+
+        loadPromises.set(source, loadPromise);
+        const result = await loadPromise;
+        svgCache.set(source, result);
+        return result;
+    }
+
+    $effect(() => {
+        if (!isClient) return;
+
+        let cancelled = false;
+        const controller = new AbortController();
+        const { signal } = controller;
+
+        const cachedSvg = getCachedSvg(src);
+        if (cachedSvg !== null || svgCache.has(src)) {
+            svg = cachedSvg;
+            error = cachedSvg === null;
+            return;
+        }
+
+        svg = null;
+        error = false;
+
+        const load = async () => {
+            const result = (await fetchSvg(src, signal)) ?? null;
+            if (cancelled) return;
+            svg = result;
+            error = result === null;
+            if (result === null) {
+                console.error("SvgInline: could not load", src);
             }
         };
 
