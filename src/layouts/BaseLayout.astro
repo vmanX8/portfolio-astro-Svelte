@@ -72,12 +72,31 @@ const { title, description } = Astro.props;
     </head>
 
     <body
-        class="bg-[color:var(--background)] text-white antialiased min-h-screen flex flex-col font-sans"
+        class="app-background bg-[color:var(--background)] text-white antialiased min-h-screen flex flex-col font-sans"
     >
         <main class="flex-1 animate-fadeIn">
             <slot />
         </main>
 
         <Footer client:load locale={lang} links={footerLinks} />
+
+        <script is:inline>
+            const updateSpotlight = (event) => {
+                if (event.pointerType !== "mouse") return;
+
+                document.documentElement.style.setProperty(
+                    "--spotlight-x",
+                    `${(event.clientX / window.innerWidth) * 100}%`
+                );
+                document.documentElement.style.setProperty(
+                    "--spotlight-y",
+                    `${(event.clientY / window.innerHeight) * 100}%`
+                );
+            };
+
+            window.addEventListener("pointermove", updateSpotlight, {
+                passive: true,
+            });
+        </script>
     </body>
 </html>
