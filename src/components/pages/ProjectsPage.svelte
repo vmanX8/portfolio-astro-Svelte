@@ -5,15 +5,16 @@
     import {
         getLatestProjectsByLanguage,
         type Project,
-    } from "../../lib/content/projects";
+    } from "../../lib/content/projects/index";
     import ProjectIcon from "../ui/ProjectIcon.svelte";
     import { fade } from "svelte/transition";
 
     type Props = {
         locale?: Locale;
+        projects?: Project[];
     };
 
-    let { locale = "en" }: Props = $props();
+    let { locale = "en", projects: projectsProp }: Props = $props();
 
     $effect.pre(() => {
         setupI18n(locale);
@@ -21,7 +22,7 @@
 
     const t = _;
     const lang = $derived(($localeStore === "gr" ? "gr" : "en") as "en" | "gr");
-    const orderedProjects = $derived(getLatestProjectsByLanguage(lang));
+    const orderedProjects = $derived(projectsProp ?? getLatestProjectsByLanguage(lang));
 
     let currentIndex = $state(0);
     let selectedProject = $state<Project | null>(null);
@@ -123,7 +124,7 @@
             "project",
         );
         const projectIndex = orderedProjects.findIndex(
-            (project) => project.id === projectId,
+            (project: Project) => project.id === projectId,
         );
 
         if (projectIndex >= 0) {

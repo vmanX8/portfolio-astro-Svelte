@@ -2,17 +2,12 @@
   import { setupI18n } from "../../lib/i18n/i18n";
   import InView from "../ui/InView.svelte";
   import type { Locale } from "../../lib/i18n/messages";
-  import { aboutContent } from "../../lib/content/about";
+  import { aboutContent } from "../../lib/content/about/index";
 
   type Props = {
     locale?: Locale;
+    data?: AboutSectionData;
   };
-
-  let { locale = "en" }: Props = $props();
-
-  $effect.pre(() => {
-    setupI18n(locale);
-  });
 
   type AboutSectionData = {
     title: string;
@@ -20,61 +15,14 @@
     paragraphs: readonly string[];
   };
 
-  let data = $state<AboutSectionData>(aboutContent.en);
-  let loading = $state(true);
-  let error = $state<string | null>(null);
-  let abortController: AbortController | null = null;
+  let { locale = "en", data: dataProp }: Props = $props();
 
-  async function loadAbout(lang: Locale) {
-    loading = true;
-    error = null;
-    abortController?.abort();
-    abortController = new AbortController();
-
-    const url = `/api/section2/lang?lang=${lang}`;
-
-    try {
-      const res = await fetch(url, {
-        signal: abortController.signal,
-        headers: {
-          "Cache-Control": "no-store",
-        },
-        credentials: "same-origin",
-      });
-
-      if (!res.ok) throw new Error("Failed to load About section from API");
-
-      const json = (await res.json()) as {
-        title: string;
-        highlight?: string;
-        paragraphs: readonly string[];
-      };
-
-      data = {
-        title: json.title,
-        highlight: json.highlight ?? aboutContent[lang].highlight,
-        paragraphs: json.paragraphs,
-      };
-    } catch (e) {
-      if (e instanceof Error && e.name !== "AbortError") {
-        data = aboutContent[lang];
-        error = e.message;
-      }
-    } finally {
-      loading = false;
-    }
-  }
-
-  $effect(() => {
-    if (!locale) return;
-    void loadAbout(locale);
+  $effect.pre(() => {
+    setupI18n(locale);
   });
 
-  $effect(() => {
-    return () => {
-      abortController?.abort();
-    };
-  });
+  const lang = $derived(locale === "gr" ? "gr" : "en");
+  const data = $derived(dataProp ?? aboutContent[lang]);
 </script>
 
 <section id="about" class="section-spacing" aria-labelledby="about-title">
@@ -95,12 +43,6 @@
             <p>{p}</p>
           {/each}
         </div>
-
-        {#if loading}
-          <p class="mt-6 text-sm text-teal-200">Loading...</p>
-        {:else if error}
-          <p class="mt-6 text-sm text-amber-400">(Fallback) {error}</p>
-        {/if}
       </div>
     </InView>
   </div>

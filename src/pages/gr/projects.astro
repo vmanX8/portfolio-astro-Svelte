@@ -4,9 +4,11 @@ import NavBarShell from "../../components/NavBarShell.astro";
 import ProjectsPage from "../../components/pages/ProjectsPage.svelte";
 import { tSeo } from "../../lib/i18n/server";
 import type { Locale } from "../../lib/i18n/messages";
+import { getLatestProjectsByLanguage } from "../../lib/content/projects";
 
 const lang = (Astro.currentLocale as Locale) || "gr";
 const seo = tSeo(lang);
+const projects = getLatestProjectsByLanguage(lang);
 ---
 
 <BaseLayout
@@ -15,5 +17,5 @@ const seo = tSeo(lang);
     lang={lang}
 >
     <NavBarShell />
-    <ProjectsPage client:load locale={lang} />
+    <ProjectsPage client:load locale={lang} projects={projects} />
 </BaseLayout>

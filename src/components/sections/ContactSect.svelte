@@ -45,7 +45,7 @@
             </label>
             <input
               id="contact-name"
-              class="form-control"
+              class="w-full rounded-xl border border-teal-800 bg-[color:var(--surface)] px-4 py-3 placeholder:text-teal-700 focus:outline-none focus:ring-2 focus:ring-[color:var(--accent)]/60"
               type="text"
               name="name"
               autocomplete="name"
@@ -59,7 +59,7 @@
             </label>
             <input
               id="contact-email"
-              class="form-control"
+              class="w-full rounded-xl border border-teal-800 bg-[color:var(--surface)] px-4 py-3 placeholder:text-teal-700 focus:outline-none focus:ring-2 focus:ring-[color:var(--accent)]/60"
               type="email"
               name="email"
               autocomplete="email"
@@ -73,7 +73,7 @@
             </label>
             <input
               id="contact-subject"
-              class="form-control"
+              class="w-full rounded-xl border border-teal-800 bg-[color:var(--surface)] px-4 py-3 placeholder:text-teal-700 focus:outline-none focus:ring-2 focus:ring-[color:var(--accent)]/60"
               type="text"
               name="subject"
               autocomplete="off"
@@ -87,7 +87,7 @@
             </label>
             <textarea
               id="contact-message"
-              class="form-control form-textarea"
+              class="min-h-[140px] w-full rounded-xl border border-teal-800 bg-[color:var(--surface)] px-4 py-3 placeholder:text-teal-500 focus:outline-none focus:ring-2 focus:ring-[color:var(--accent)]/60"
               name="message"
               placeholder={$t("contactSection.messagePlaceholder")}
             ></textarea>

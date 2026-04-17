@@ -2,7 +2,7 @@ import type { APIRoute } from "astro";
 import {
   currentFocusByLanguage,
   type CurrentFocus,
-} from "../../../lib/content/currentFocus";
+} from "../../../lib/content/about/currentFocus";
 import type { Locale } from "../../../lib/i18n/messages";
 
 export type CurrentFocusPayload = CurrentFocus & {

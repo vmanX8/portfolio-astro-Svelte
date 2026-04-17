@@ -1,7 +1,7 @@
 ﻿/**
  * About section copy by locale.
  */
-export type Locale = "en" | "gr";
+import type { Locale } from "../../i18n/messages";
 
 /** About section text by locale. */
 export const aboutContent = {

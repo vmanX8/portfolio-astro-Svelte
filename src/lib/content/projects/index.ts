@@ -2,12 +2,12 @@
  * Public projects content API.
  */
 
-import type { Locale } from "../i18n/messages";
-import { projectBaseList } from "./projectData";
-import { projectTextByLanguage } from "./projectLocales";
-import type { Project, ProjectBase, ProjectText } from "./projectTypes";
+import type { Locale } from "../../i18n/messages";
+import { projectBaseList } from "./data";
+import { projectTextByLanguage } from "./locales";
+import type { Project, ProjectBase, ProjectText } from "./types";
 
-export type { Project, ProjectBase, ProjectText } from "./projectTypes";
+export type { Project, ProjectBase, ProjectText } from "./types";
 
 function emptyProjectText(id: string): ProjectText {
   return {

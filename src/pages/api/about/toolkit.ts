@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { toolkitByLanguage, type Toolkit } from "../../../lib/content/toolkit";
+import { toolkitByLanguage, type Toolkit } from "../../../lib/content/about/toolkit";
 import type { Locale } from "../../../lib/i18n/messages";
 
 export type ToolkitPayload = Toolkit & {

@@ -7,15 +7,19 @@ import ProjectsSect from "../../components/sections/ProjectsSect.svelte";
 import ContactSect from "../../components/sections/ContactSect.svelte";
 import { tSeo } from "../../lib/i18n/server";
 import type { Locale } from "../../lib/i18n/messages";
+import { aboutContent } from "../../lib/content/about";
+import { getFeaturedProjectsByLanguage } from "../../lib/content/projects";
 
 const lang = (Astro.currentLocale as Locale) || "gr";
 const seo = tSeo(lang);
+const about = aboutContent[lang];
+const featuredProjects = getFeaturedProjectsByLanguage(lang);
 ---
 
 <BaseLayout title={seo.homeTitle} description={seo.homeDescription} lang={lang}>
 	<NavBarShell />
-	<HeroSect client:load locale={lang} />
-	<AboutSect client:load locale={lang} />
-	<ProjectsSect client:load locale={lang} />
-	<ContactSect client:load locale={lang} />
+	<HeroSect client:visible locale={lang} />
+	<AboutSect client:visible locale={lang} data={about} />
+	<ProjectsSect client:visible locale={lang} projects={featuredProjects} />
+	<ContactSect client:visible locale={lang} />
 </BaseLayout>
