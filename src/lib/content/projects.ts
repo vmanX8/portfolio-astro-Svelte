@@ -10,7 +10,6 @@ export type Project = {
   summary: string;
   details: string;
   tech: string[];
-  /** SVG icon path under `public/assets/projects/`. */
   icon?: string;
   demoUrl?: string;
   repoUrl?: string;
@@ -19,7 +18,6 @@ export type Project = {
 type ProjectBase = {
   id: string;
   tech: string[];
-  /** SVG icon path under `public/assets/projects/`. */
   icon?: string;
   demoUrl?: string;
   repoUrl?: string;
@@ -54,7 +52,7 @@ const baseProjects: ProjectBase[] = [
   },
   {
     id: "motion-crm",
-    tech: ["React", "TypeScript", "Tailwind CSS", "GSAP", "React Router", "Vite", "jQuery"],
+    tech: ["React", "TypeScript", "Tailwind CSS", "GSAP", "React Router", "jQuery"],
     icon: "/assets/projects/crm.svg",
     demoUrl: "https://motion-crm.vercel.app/",
     repoUrl: "https://github.com/vmanX8/motion-crm",

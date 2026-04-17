@@ -22,6 +22,10 @@
   const latestProjects = $derived(projects.toReversed());
   const featuredProjects = $derived(latestProjects.slice(0, 3));
   const projectsHref = $derived(lang === "gr" ? "/gr/projects" : "/projects");
+
+  function getProjectHref(projectId: string) {
+    return `${projectsHref}?project=${encodeURIComponent(projectId)}`;
+  }
 </script>
 
 <section id="projects" class="section-spacing" aria-labelledby="projects-title">
@@ -51,7 +55,7 @@
         <div class="grid gap-6 grid-cols-6">
           {#each featuredProjects as p (p.id)}
             <a
-              href={projectsHref}
+              href={getProjectHref(p.id)}
               class="group text-left rounded-2xl border border-teal-800 bg-[color:var(--surface)]/40 p-5 h-full col-span-6 md:col-span-2 transition-all duration-200 ease-out backdrop-blur-sm shadow-sm hover:shadow-xl transform-gpu hover:-translate-y-1 hover:border-[color:var(--accent-weak)]/60 hover:bg-[color:var(--surface)]/70 focus:outline-none focus:ring-2 focus:ring-[color:var(--accent)]/60"
               aria-label={`${p.title} - ${$t("projectsSection.viewAll")}`}
             >

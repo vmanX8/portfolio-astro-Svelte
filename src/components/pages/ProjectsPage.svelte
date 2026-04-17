@@ -26,6 +26,7 @@
 
     let currentIndex = $state(0);
     let selectedProject = $state<Project | null>(null);
+    let initialProjectApplied = $state(false);
 
     function getVisibleProjects() {
         if (!orderedProjects.length) return [] as Project[];
@@ -108,6 +109,29 @@
         if (currentIndex >= orderedProjects.length) {
             currentIndex = 0;
         }
+    });
+
+    $effect(() => {
+        if (
+            initialProjectApplied ||
+            typeof window === "undefined" ||
+            !orderedProjects.length
+        ) {
+            return;
+        }
+
+        const projectId = new URLSearchParams(window.location.search).get(
+            "project",
+        );
+        const projectIndex = orderedProjects.findIndex(
+            (project) => project.id === projectId,
+        );
+
+        if (projectIndex >= 0) {
+            currentIndex = projectIndex;
+        }
+
+        initialProjectApplied = true;
     });
 </script>
 
@@ -203,14 +227,15 @@
                         aria-label={$t("projectsSection.close")}
                     ></button>
                     <div
-                        class="fixed inset-0 z-50 flex items-center justify-center p-4"
+                        class="fixed inset-0 z-50 flex pointer-events-none items-center justify-center p-4"
                     >
                         <div
-                            class="w-full max-w-3xl rounded-3xl border border-white/10 bg-[color:var(--surface)]/95 p-6 shadow-2xl ring-1 ring-black/30 overflow-hidden"
+                            class="pointer-events-auto w-full max-w-3xl rounded-3xl border border-white/10 bg-[color:var(--surface)]/95 p-6 shadow-2xl ring-1 ring-black/30 overflow-hidden"
                             transition:fade={{ duration: 180 }}
                             role="dialog"
                             aria-modal="true"
                             aria-label={$t("projectsSection.modalTitle")}
+                            tabindex="-1"
                         >
                             <div class="flex flex-col gap-4">
                                 <div
