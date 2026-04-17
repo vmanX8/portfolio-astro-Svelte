@@ -2,7 +2,7 @@
   import { _, locale as localeStore } from "svelte-i18n";
   import { setupI18n } from "../../lib/i18n/i18n";
   import type { Locale } from "../../lib/i18n/messages";
-  import { projectsByLanguage } from "../../lib/content/projects";
+  import { getFeaturedProjectsByLanguage } from "../../lib/content/projects";
   import InView from "../ui/InView.svelte";
   import ProjectIcon from "../ui/ProjectIcon.svelte";
 
@@ -18,9 +18,7 @@
   const t = _;
 
   const lang = $derived(($localeStore === "gr" ? "gr" : "en") as "en" | "gr");
-  const projects = $derived(projectsByLanguage[lang]);
-  const latestProjects = $derived(projects.toReversed());
-  const featuredProjects = $derived(latestProjects.slice(0, 3));
+  const featuredProjects = $derived(getFeaturedProjectsByLanguage(lang));
   const projectsHref = $derived(lang === "gr" ? "/gr/projects" : "/projects");
 
   function getProjectHref(projectId: string) {
@@ -49,7 +47,7 @@
         </a>
       </header>
 
-      {#if !projects.length}
+      {#if !featuredProjects.length}
         <p class="text-slate-300">{$t("projectsSection.empty")}</p>
       {:else}
         <div class="grid gap-6 grid-cols-6">

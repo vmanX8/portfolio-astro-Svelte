@@ -1,0 +1,19 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import NavBarShell from "../components/NavBarShell.astro";
+import ProjectsPage from "../components/pages/ProjectsPage.svelte";
+import { tSeo } from "../lib/i18n/server";
+import type { Locale } from "../lib/i18n/messages";
+
+const lang = (Astro.currentLocale as Locale) || "en";
+const seo = tSeo(lang);
+---
+
+<BaseLayout
+    title={seo.projectsTitle}
+    description={seo.projectsDescription}
+    lang={lang}
+>
+    <NavBarShell />
+    <ProjectsPage client:load locale={lang} />
+</BaseLayout>

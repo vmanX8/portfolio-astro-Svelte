@@ -11,7 +11,8 @@ export const messages = {
         "Welcome to my portfolio built with Astro, Svelte, and Tailwind. Fast, responsive, and SEO-friendly.",
 		
       aboutTitle: "VM | About me",
-      aboutDescription: "About page (coming soon).",
+      aboutDescription:
+        "About Vangelis, a frontend engineer building clear, modern, and useful interfaces with an engineering mindset.",
 
       projectsTitle: "VM | My Projects",
       projectsDescription: "Projects page (coming soon).",
@@ -99,7 +100,8 @@ export const messages = {
 				"Καλώς ήλθατε στο Portfolio μου. Σχεδιάστηκε με Astro + Svelte + Tailwind. Γρήγορο, responsive και φιλικό στο SEO.",
 
 			aboutTitle: "ΒΜ | Σχετικά με εμένα",
-			aboutDescription: "Σελίδα Σχετικά (σύντομα κοντά σας).",
+			aboutDescription:
+				"Σχετικά με τον Βαγγέλη, frontend engineer που χτίζει καθαρά, μοντέρνα και χρήσιμα interfaces με engineering mindset.",
 
 			projectsTitle: "ΒΜ | Τα Projects μου",
 			projectsDescription: "Σελίδα Projects (σύντομα κοντά σας).",

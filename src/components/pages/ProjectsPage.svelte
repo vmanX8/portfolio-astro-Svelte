@@ -3,7 +3,7 @@
     import { setupI18n } from "../../lib/i18n/i18n";
     import type { Locale } from "../../lib/i18n/messages";
     import {
-        projectsByLanguage,
+        getLatestProjectsByLanguage,
         type Project,
     } from "../../lib/content/projects";
     import ProjectIcon from "../ui/ProjectIcon.svelte";
@@ -21,8 +21,7 @@
 
     const t = _;
     const lang = $derived(($localeStore === "gr" ? "gr" : "en") as "en" | "gr");
-    const projects = $derived(projectsByLanguage[lang]);
-    const orderedProjects = $derived(projects.toReversed());
+    const orderedProjects = $derived(getLatestProjectsByLanguage(lang));
 
     let currentIndex = $state(0);
     let selectedProject = $state<Project | null>(null);
@@ -151,7 +150,7 @@
             </p>
         </header>
 
-        {#if !projects.length}
+        {#if !orderedProjects.length}
             <p class="text-slate-300">{$t("projectsSection.empty")}</p>
         {:else}
             <div class="space-y-8">
