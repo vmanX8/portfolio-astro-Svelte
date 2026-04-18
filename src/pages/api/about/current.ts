@@ -9,13 +9,13 @@ export type CurrentFocusPayload = CurrentFocus & {
   lang: Locale;
 };
 
-export const GET: APIRoute = async ({ request, currentLocale }) => {
+export const GET: APIRoute = async ({ request }) => {
   const url = new URL(request.url);
   const requested = url.searchParams.get("lang")?.toLowerCase();
   const lang =
     requested === "en" || requested === "gr"
       ? (requested as Locale)
-      : ((currentLocale as Locale) || "en");
+      : "en";
 
   const payload: CurrentFocusPayload = {
     lang,
