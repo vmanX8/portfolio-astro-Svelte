@@ -12,6 +12,13 @@ export const projectBaseList: ProjectBase[] = [
     repoUrl: "https://github.com/vmanX8/portfolio-astro-Svelte",
   },
   {
+    id: "react-portfolio",
+    tech: ["React", "TypeScript", "Vite", "Vercel", "GitHub"],
+    icon: "/assets/projects/portfolio.svg",
+    demoUrl: "https://my-portfolio-l4ej.vercel.app/",
+    repoUrl: "https://github.com/vmanX8/my-portfolio",
+  },
+  {
     id: "snakes-ladders",
     tech: ["React", "TypeScript"],
     icon: "/assets/projects/snakes-ladders.svg",

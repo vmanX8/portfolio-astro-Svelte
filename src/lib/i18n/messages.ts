@@ -18,7 +18,8 @@ export const messages = {
       projectsDescription: "Projects page (coming soon).",
 
       contactTitle: "VM | Contact",
-      contactDescription: "Contact page (coming soon).",
+      contactDescription:
+        "Contact Vangelis Manouhos for frontend roles, collaborations, freelance work, or web interface projects.",
     },
     nav: {
       home: "Home",
@@ -107,7 +108,8 @@ export const messages = {
 			projectsDescription: "Σελίδα Projects (σύντομα κοντά σας).",
 
 			contactTitle: "ΒΜ | Επικοινωνία",
-			contactDescription: "Σελίδα Επικοινωνία (σύντομα κοντά σας).",
+			contactDescription:
+				"Επικοινωνία με τον Vangelis Manouhos για frontend ρόλους, συνεργασίες, freelance δουλειά ή web interface projects.",
 		},
 		nav: {
 			home: "Αρχική",
