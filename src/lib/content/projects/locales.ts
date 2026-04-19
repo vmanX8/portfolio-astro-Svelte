@@ -12,6 +12,13 @@ export const projectTextByLanguage: LocalizedProjectText = {
       details:
         "A modular portfolio application built with Astro, Svelte, TypeScript, and Tailwind CSS. It features multilingual support (EN/GR), scroll-based animations, and SEO-friendly structure. The About section consumes data from an Astro API route that simulates backend-driven content, demonstrating API integration in a static front-end context.",
     },
+    "react-portfolio": {
+      title: "Personal Portfolio - React SPA",
+      summary:
+        "My first GitHub portfolio project, built as a React SPA with TypeScript, Vite, and Tailwind CSS.",
+      details:
+        "A modern, responsive personal portfolio built as a single-page application (SPA) with React, TypeScript, and Vite to showcase my front-end development skills, UI design sense, and deployment workflow. It includes a clean layout, smooth navigation, sections for projects, skills, and contact information, plus deployment on Vercel with a GitHub-based CI/CD workflow. The project focuses on mobile-friendly design, interactive components, smooth animations, and a minimal UX centered around developer identity.",
+    },
     "snakes-ladders": {
       title: "Snakes & Ladders Game",
       summary: "Classic board game rebuilt in React with a playful modern UI.",
@@ -46,6 +53,14 @@ gr: {
     summary: "Σύγχρονο και responsive portfolio με Astro, Svelte και Tailwind CSS.",
     details:
       "Portfolio εφαρμογή υλοποιημένη με Astro, Svelte, TypeScript και Tailwind CSS. Υποστηρίζει πολλαπλές γλώσσες (EN/GR), animations και SEO-friendly δομή. Το section About αντλεί δεδομένα από Astro API route που προσομοιώνει backend, αναδεικνύοντας την ενσωμάτωση API σε ένα στατικό front-end περιβάλλον.",
+  },
+
+  "react-portfolio": {
+    title: "Personal Portfolio - React SPA",
+    summary:
+      "Το πρώτο μου portfolio project στο GitHub, υλοποιημένο ως React SPA με TypeScript, Vite και Tailwind CSS.",
+    details:
+      "Σύγχρονο και responsive προσωπικό portfolio, υλοποιημένο ως single-page application (SPA) με React, TypeScript και Vite, με στόχο να παρουσιάσει τις frontend δεξιότητές μου, την αισθητική μου στο UI design και τη διαδικασία deployment. Περιλαμβάνει καθαρό layout, ομαλή πλοήγηση, sections για projects, skills και στοιχεία επικοινωνίας, καθώς και deployment στο Vercel με GitHub-based CI/CD workflow. Το project εστιάζει σε mobile-friendly σχεδιασμό, interactive components, smooth animations και minimal UX γύρω από την developer ταυτότητα.",
   },
 
   "snakes-ladders": {

@@ -1,14 +1,14 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { getRelativeLocaleUrl } from "astro:i18n";
 import NavBarShell from "../components/NavBarShell.astro";
-import TBD from "../components/TBD.svelte";
+import ContactPage from "../components/pages/ContactPage.svelte";
 import { tSeo } from "../lib/i18n/server";
 import type { Locale } from "../lib/i18n/messages";
+import { contactCopy, contactLinks } from "../lib/content/contact";
 
 const lang = (Astro.currentLocale as Locale) || "en";
 const seo = tSeo(lang);
-const homeHref = getRelativeLocaleUrl(lang);
+const pageCopy = contactCopy[lang];
 ---
 
 <BaseLayout
@@ -17,5 +17,10 @@ const homeHref = getRelativeLocaleUrl(lang);
     lang={lang}
 >
     <NavBarShell />
-    <TBD pageKey="contact" locale={lang} homeHref={homeHref} />
+    <ContactPage
+        client:load
+        locale={lang}
+        copy={pageCopy}
+        links={contactLinks}
+    />
 </BaseLayout>
