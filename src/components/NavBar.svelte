@@ -86,7 +86,7 @@
 <nav
   class="bg-[color:var(--surface)]/90 backdrop-blur fixed w-full z-10 top-0 shadow-md border-b border-white/10"
 >
-  <div class="max-w-5xl mx-auto flex items-center justify-between px-4 py-4">
+  <div class="max-w-[64rem] mx-auto flex items-center justify-between px-4 py-4">
     <a
       href={homeHref}
       class="text-white text-2xl font-semibold tracking-wide">Portfolio</a

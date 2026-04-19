@@ -1,12 +1,12 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import svelte from "@astrojs/svelte"
-import tailwind from "@astrojs/tailwind";
+import tailwindcss from "@tailwindcss/vite";
 import vercel from "@astrojs/vercel";
 
 export default defineConfig({
-  integrations: [svelte(), tailwind()],
-  output: "hybrid",
+  integrations: [svelte()],
+  output: "static",
   adapter: vercel(),
   devToolbar: {
     enabled: false,
@@ -15,5 +15,9 @@ export default defineConfig({
   i18n: {
     locales: ["en", "gr"],
     defaultLocale: "en",
+  },
+
+  vite: {
+    plugins: [tailwindcss()],
   },
 });

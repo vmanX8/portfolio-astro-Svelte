@@ -1,1 +1,0 @@
-import{x as c,q as _,v as o,P as d,an as T,H as b,A as v,z as y,C as A,B as f}from"./branches.CDzhmqWf.js";function g(n,i,u=!1){_&&o();var r=new A(n),h=u?d:0;function t(a,s){if(_){const l=T(n)===b;if(a===l){var e=v();y(e),r.anchor=e,f(!1),r.ensure(a,s),f(!0);return}}r.ensure(a,s)}c(()=>{var a=!1;i((s,e=!0)=>{a=!0,t(e,s)}),a||t(!1,null)},h)}export{g as i};

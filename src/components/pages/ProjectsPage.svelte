@@ -7,7 +7,6 @@
         type Project,
     } from "../../lib/content/projects/index";
     import ProjectIcon from "../ui/ProjectIcon.svelte";
-    import { fade } from "svelte/transition";
 
     type Props = {
         locale?: Locale;
@@ -27,6 +26,18 @@
     let currentIndex = $state(0);
     let selectedProject = $state<Project | null>(null);
     let initialProjectApplied = $state(false);
+
+    function fadeTransition(
+        node: Element,
+        { duration = 400 }: { duration?: number } = {},
+    ) {
+        const opacity = Number(getComputedStyle(node).opacity);
+
+        return {
+            duration,
+            css: (t: number) => `opacity: ${t * opacity}`,
+        };
+    }
 
     function getVisibleProjects() {
         if (!orderedProjects.length) return [] as Project[];
@@ -231,7 +242,7 @@
                     >
                         <div
                             class="pointer-events-auto w-full max-w-3xl rounded-3xl border border-white/10 bg-[color:var(--surface)]/95 p-6 shadow-2xl ring-1 ring-black/30 overflow-hidden"
-                            transition:fade={{ duration: 180 }}
+                            transition:fadeTransition={{ duration: 180 }}
                             role="dialog"
                             aria-modal="true"
                             aria-label={$t("projectsSection.modalTitle")}
