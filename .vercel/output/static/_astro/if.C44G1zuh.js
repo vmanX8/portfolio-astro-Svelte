@@ -1,0 +1,1 @@
+import{C as c,z as o,A as l,W as b,as as v,G as g,F as p,J as y,I as _,T}from"./branches.DjU-GtuW.js";function A(d,f,h=!1){var n;o&&(n=T,l());var s=new y(d),u=h?b:0;function t(a,r){if(o){var e=v(n);if(a!==parseInt(e.substring(1))){var i=g();p(i),s.anchor=i,_(!1),s.ensure(a,r),_(!0);return}}s.ensure(a,r)}c(()=>{var a=!1;f((r,e=0)=>{a=!0,t(e,r)}),a||t(-1,null)},u)}export{A as i};

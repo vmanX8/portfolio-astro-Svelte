@@ -20,7 +20,7 @@
 
 <footer class="border-t border-white/10 bg-[color:var(--surface)] text-white">
   <div
-    class="max-w-5xl mx-auto px-4 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-teal-100"
+    class="max-w-[64rem] mx-auto px-4 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-teal-100"
   >
     <p>
       &copy; {year}

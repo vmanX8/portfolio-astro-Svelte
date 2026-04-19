@@ -1,4 +1,6 @@
-@import "tailwindcss";
+@import "tailwindcss" source(none);
+@source "../";
+@source "../../public";
 
 :root {
 	--background: #0b1a13;
@@ -212,7 +214,8 @@
 
 @layer components {
 	.section-shell {
-		@apply mx-auto max-w-5xl px-4;
+		@apply mx-auto px-4;
+		max-width: 64rem;
 	}
 
 	.section-spacing {

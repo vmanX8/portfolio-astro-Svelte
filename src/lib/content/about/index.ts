@@ -21,7 +21,7 @@ export const aboutContent = {
 		title: "Σχετικά με εμένα",
 		highlight: "Front-end engineer με μηχανολογική νοοτροπία, που αναπτύσσει σύγχρονα, ανθρωποκεντρικά web interfaces.",
 		paragraphs: [
-			"Front-End Engineer σε μεταφατική φάση, με ισχυρό τεχνικό υπόβαθρο και πρακτική ενασχόλιση με την React βιβλιοθήκη και σύγχρονες τεχνολογίες web. ",
+			"Front-End Engineer σε μεταβατική φάση, με ισχυρό τεχνικό υπόβαθρο και πρακτική ενασχόλιση με την React βιβλιοθήκη και σύγχρονες τεχνολογίες web. ",
 
 			"Αυτή την περίοδο εργάζομαι ως Presales / Field Application Engineer, όπου έχω αναπτύξει έντονη αναλυτική σκέψη, κατανόηση σύνθετων τεχνικών απαιτήσεων και την ικανότητα να μετατρέπω τις ανάγκες των χρηστών σε λειτουργικές και εφαρμόσιμες λύσεις. ",
 
@@ -83,21 +83,21 @@ export type AboutPageCopy = {
 export const aboutPageContent: Record<Locale, AboutPageCopy> = {
     en: {
       eyebrow: "About",
-      title: "Designing scalable frontend experiences with an engineering mindset",
+      title: "Scalable frontend experiences with an engineering mindset",
       intro: [
         "I'm a Frontend Engineer with a background in Electrical & Electronic Engineering, focused on building modern, user-centered web applications using React and TypeScript.",
         "My path into development grew out of a technical, client-facing role in presales engineering. For several years, I analyzed requirements, worked with stakeholders, and translated complex technical needs into structured solutions. That experience still shapes how I approach frontend work today: with clarity, structure, and a strong focus on usability.",
       ],
       profile: {
-        role: "Frontend Engineer",
-        summary: "Engineering-minded UI builder",
-        focusLabel: "Focus",
-        focus: "Scalable product UI",
-        approachLabel: "Approach",
-        approach: "Systems + usability",
-        stackLabel: "Stack",
-        stack: "React + TypeScript",
-      },
+  role: "Frontend Engineer",
+  summary: "Frontend engineer focused on scalable, user-centered interfaces",
+  focusLabel: "Focus",
+  focus: "Scalable product UI",
+  approachLabel: "Approach",
+  approach: "Systems + usability",
+  stackLabel: "Stack",
+  stack: "React + TypeScript",
+},
       story: {
         eyebrow: "Production experience",
         title: "From real-world systems to frontend architecture",
@@ -169,92 +169,93 @@ export const aboutPageContent: Record<Locale, AboutPageCopy> = {
       },
     },
     gr: {
-      eyebrow: "About",
-      title: "Σχεδιάζω frontend εμπειρίες με δομή και καθαρή σκέψη",
-      intro: [
-        "Είμαι Frontend Engineer, απόφοιτος Ηλεκτρολογικής και Ηλεκτρονικής Μηχανικής και ασχολούμαι με τη δημιουργία σύγχρονων, διαδικτυακών εφαρμογών που δίνουν έμφαση στην εμπειρία χρήστη, κυρίως με React και TypeScript.",
-        "Η πορεία μου προς το development ξεκίνησε μέσα από έναν τεχνικό ρόλο με άμεση επαφή με πελάτες, ως μηχανικός πωλήσεων. Για αρκετά χρόνια ανέλυα απαιτήσεις, συνεργαζόμουν με διαφορετικούς stakeholders και μετέφραζα σύνθετες ανάγκες σε πρακτικές λύσεις. Αυτή η εμπειρία επηρεάζει ακόμη τον τρόπο που δουλεύω στο frontend: με καθαρή δομή, ουσιαστική σκέψη και έμφαση στη χρηστικότητα.",
-      ],
-      profile: {
-        role: "Frontend Engineer",
-        summary: "UI builder με engineering mindset",
-        focusLabel: "Focus",
-        focus: "Scalable product UI",
-        approachLabel: "Προσέγγιση",
-        approach: "Systems + usability",
-        stackLabel: "Stack",
-        stack: "React + TypeScript",
+  eyebrow: "ΣΧΕΤΙΚΑ ΜΕ ΕΜΕΝΑ",
+  title: "Frontend εμπειρίες με δομή και τεχνική σκέψη",
+  intro: [
+    "Είμαι Frontend Engineer με σπουδές στην Ηλεκτρολογική και Ηλεκτρονική Μηχανική και ασχολούμαι με την ανάπτυξη σύγχρονων web εφαρμογών, με έμφαση στην εμπειρία χρήστη και τη λειτουργικότητα, κυρίως με React και TypeScript.",
+    "Η ενασχόλησή μου με το development ξεκίνησε μέσα από έναν τεχνικό ρόλο με άμεση επαφή με πελάτες, στον χώρο του presales engineering. Για αρκετά χρόνια ανέλυα απαιτήσεις, συνεργαζόμουν με διαφορετικούς stakeholders και μετέφραζα σύνθετες ανάγκες σε πρακτικές λύσεις. Αυτή η εμπειρία επηρεάζει μέχρι σήμερα τον τρόπο που δουλεύω στο frontend: με καθαρή δομή, ουσιαστική σκέψη και έμφαση στη χρηστικότητα.",
+  ],
+  profile: {
+    role: "Frontend Engineer",
+    summary: "Frontend engineer με έμφαση στη δομή και την εμπειρία του χρήστη",
+    focusLabel: "Εστίαση",
+    focus: "UI για πραγματικά προϊόντα",
+    approachLabel: "Προσέγγιση",
+    approach: "Δομή και χρηστικότητα",
+    stackLabel: "Τεχνολογίες",
+    stack: "React + TypeScript",
+  },
+  story: {
+    eyebrow: "ΕΜΠΕΙΡΙΑ",
+    title: "Από πραγματικά συστήματα σε frontend αρχιτεκτονική",
+    paragraphs: [
+      "Πέρα από προσωπικά projects, έχω συμμετάσχει στην ανάπτυξη full-stack εφαρμογής που χρησιμοποιείται σε production από μεγάλο αριθμό χρηστών.",
+      "Η εφαρμογή δημιουργήθηκε για να αντικαταστήσει πάνω από δέκα χρόνια αδόμητων οικονομικών δεδομένων σε Excel με ένα οργανωμένο σύστημα βασισμένο σε web τεχνολογίες και database. Δουλεύοντας σε μικρή ομάδα, είχα κυρίως την ευθύνη του frontend και συνέβαλα στη συνολική δομή του UI και στην εμπειρία χρήστη.",
+      "Ασχολήθηκα με τον σχεδιασμό και την υλοποίηση του layout και των components, όπως πίνακες δεδομένων, φόρμες, φίλτρα και λειτουργίες αναζήτησης. Έδωσα ιδιαίτερη έμφαση στη δημιουργία επαναχρησιμοποιήσιμων components, ώστε το interface να παραμένει συνεπές και εύκολα επεκτάσιμο.",
+      "Η εφαρμογή κάλυπτε πραγματικές ανάγκες, όπως διαχείριση πελατών και οικονομικών στοιχείων. Περιλάμβανε authentication με sessions, διαχείριση asynchronous δεδομένων και δυνατότητα export σε PDF και Excel μέσω task polling, ώστε το UI να παραμένει responsive ακόμη και σε απαιτητικές διεργασίες.",
+      "Μέσα από αυτή τη διαδικασία απέκτησα μια πιο ολοκληρωμένη εικόνα για το πώς λειτουργεί μια frontend εφαρμογή σε πραγματικό production περιβάλλον, ειδικά όταν συνεργάζεται στενά με backend συστήματα και εξυπηρετεί πραγματικούς χρήστες.",
+    ],
+  },
+  building: {
+    eyebrow: "ΤΙ ΜΟΥ ΑΡΕΣΕΙ ΝΑ ΔΗΜΙΟΥΡΓΩ",
+    title: "Interfaces που μοιάζουν με πραγματικά προϊόντα",
+    intro:
+      "Με ενδιαφέρουν interfaces που έχουν δομή, είναι κατανοητά και θυμίζουν πραγματικές εφαρμογές, όχι απλώς demo υλοποιήσεις.",
+    cards: [
+      {
+        title: "Responsive interfaces",
+        text: "Layouts που λειτουργούν σωστά σε κάθε συσκευή, χωρίς να χάνουν καθαρότητα και ιεραρχία.",
       },
-      story: {
-        eyebrow: "Production experience",
-        title: "Από πραγματικά συστήματα σε frontend αρχιτεκτονική",
-        paragraphs: [
-          "Πέρα από προσωπικά projects, έχω δουλέψει σε full-stack εφαρμογή που χρησιμοποιείται σε production από μεγάλο αριθμό χρηστών.",
-          "Το σύστημα δημιουργήθηκε για να αντικαταστήσει πάνω από δέκα χρόνια αδόμητων οικονομικών δεδομένων σε Excel με μια οργανωμένη web εφαρμογή βασισμένη σε database. Δουλεύοντας σε μικρή ομάδα, είχα κυρίως την ευθύνη του frontend και συνέβαλα στη συνολική αρχιτεκτονική του UI και στην εμπειρία χρήστη.",
-          "Σχεδίασα και υλοποίησα το layout και τη δομή των components, όπως πίνακες δεδομένων, φόρμες, φίλτρα και αναζήτηση. Έδωσα ιδιαίτερη έμφαση στα reusable components, ώστε το interface να παραμένει συνεπές και εύκολα διαχειρίσιμο όσο το σύστημα μεγάλωνε.",
-          "Η εφαρμογή κάλυπτε πραγματικές ανάγκες, όπως διαχείριση πελατών και οικονομικών στοιχείων. Περιλάμβανε authentication με sessions, asynchronous data flows και δυνατότητα export σε PDF και Excel μέσω task polling, ώστε το UI να παραμένει responsive ακόμη και σε πιο απαιτητικές διεργασίες.",
-          "Αυτή η εμπειρία μού έδωσε μια πιο ολοκληρωμένη εικόνα για το πώς λειτουργεί μια frontend εφαρμογή σε πραγματικό production περιβάλλον, ειδικά σε συνεργασία με backend συστήματα και πραγματικούς χρήστες.",
-        ],
+      {
+        title: "Component-based systems",
+        text: "Επαναχρησιμοποιήσιμα UI components που παραμένουν συνεπή και μπορούν να κλιμακωθούν.",
       },
-      building: {
-        eyebrow: "Craft",
-        title: "Τι μου αρέσει να χτίζω",
-        intro:
-          "Με ενδιαφέρουν interfaces που είναι δομημένα, κατανοητά και κοντά σε πραγματικά προϊόντα, όχι απλώς demo εφαρμογές.",
-        cards: [
-          {
-            title: "Responsive interfaces",
-            text: "Layouts που λειτουργούν σωστά σε κάθε συσκευή, χωρίς να χάνουν καθαρότητα και ιεραρχία.",
-          },
-          {
-            title: "Component-based systems",
-            text: "Επαναχρησιμοποιήσιμες UI δομές που παραμένουν συνεπείς και κλιμακώνονται εύκολα.",
-          },
-          {
-            title: "Data-driven applications",
-            text: "Dashboards, φόρμες και workflows όπου η χρηστικότητα παίζει ουσιαστικό ρόλο.",
-          },
-          {
-            title: "Interactive UI",
-            text: "Αλληλεπιδράσεις και motion που υποστηρίζουν την εμπειρία, χωρίς να την επιβαρύνουν.",
-          },
-        ],
-        note:
-          "Τα περισσότερα projects μου ακολουθούν λογική Single Page Application, με έμφαση σε καθαρό state management, επαναχρησιμοποιήσιμα components και ξεκάθαρο data flow.",
+      {
+        title: "Data-driven εφαρμογές",
+        text: "Dashboards, φόρμες και workflows όπου η χρηστικότητα παίζει καθοριστικό ρόλο.",
       },
-      work: {
-        eyebrow: "Process",
-        title: "Πώς δουλεύω",
-        intro:
-          "Βλέπω το frontend development ως μέρος ενός μεγαλύτερου συστήματος, όχι απλώς ως το οπτικό κομμάτι μιας εφαρμογής.",
-        points: [
-          "καθαρό και ευανάγνωστο κώδικα",
-          "σωστή δομή και αρχιτεκτονική components",
-          "διαχείριση πραγματικών καταστάσεων (loading, error, success, async flows)",
-          "συνεργασία με backend και design",
-        ],
-        closing:
-          "Το υπόβαθρο στη μηχανική και η εμπειρία μου στο presales με βοηθούν να γεφυρώνω τις ανάγκες του χρήστη και της επιχείρησης με την τεχνική υλοποίηση. Προσπαθώ να σκέφτομαι σε επίπεδο συστημάτων και όχι μόνο μεμονωμένων features.",
+      {
+        title: "Interactive UI",
+        text: "Αλληλεπιδράσεις και motion που ενισχύουν την εμπειρία χωρίς να αποσπούν τον χρήστη.",
       },
-      focus: {
-        eyebrow: "Current focus",
-        title: "Τρέχον focus",
-        paragraphs: [
-          "Παράλληλα με την επαγγελματική μου εμπειρία, δουλεύω ενεργά πάνω σε projects για να εξελίσσω τις γνώσεις μου στο σύγχρονο frontend και στο full-stack development.",
-          "Τα projects του portfolio, όπως dashboards, API-driven εφαρμογές και interactive interfaces, έχουν δημιουργηθεί με στόχο να δοκιμάσω διαφορετικές τεχνολογίες και να προσεγγίσω πιο ρεαλιστικά σενάρια ανάπτυξης.",
-        ],
-      },
-      beyond: {
-        eyebrow: "Beyond code",
-        title: "Πέρα από τον κώδικα",
-        text: "Με ενδιαφέρει ιδιαίτερα το design και η οπτική επικοινωνία, μέσα από graphic και video design. Αυτό επηρεάζει φυσικά τον τρόπο που σκέφτομαι το UI, το layout και τη συνολική εμπειρία χρήστη. Για μένα, το frontend development δεν είναι μόνο λειτουργικότητα. Είναι η δημιουργία εμπειριών που είναι καθαρές, προσεγμένες και ευχάριστες στη χρήση.",
-      },
-      cta: {
-        eyebrow: "Let's connect",
-        text: "Αυτή την περίοδο εστιάζω στο να εξελίσσομαι ως frontend engineer και να συμμετέχω σε πραγματικές εφαρμογές. Αν ψάχνετε κάποιον που συνδυάζει engineering σκέψη με έμφαση στο frontend και το user experience, θα χαρώ να επικοινωνήσουμε.",
-        button: "Επικοινωνία",
-      },
-    },
+    ],
+    note:
+      "Τα περισσότερα projects μου ακολουθούν τη λογική Single Page Application, με έμφαση σε καθαρό state management, επαναχρησιμοποιήσιμα components και ξεκάθαρο data flow.",
+  },
+  work: {
+    eyebrow: "ΠΩΣ ΔΟΥΛΕΥΩ",
+    title: "Frontend ως μέρος ενός μεγαλύτερου συστήματος",
+    intro:
+      "Βλέπω το frontend development ως μέρος ενός ολοκληρωμένου συστήματος και όχι απλώς ως το οπτικό κομμάτι μιας εφαρμογής.",
+    points: [
+      "καθαρός και ευανάγνωστος κώδικας",
+      "σωστή δομή και αρχιτεκτονική components",
+      "διαχείριση πραγματικών καταστάσεων (loading, error, success, async flows)",
+      "συνεργασία με backend και design",
+    ],
+    closing:
+      "Το υπόβαθρό μου στη μηχανική και η εμπειρία μου στο presales με βοηθούν να γεφυρώνω τις ανάγκες της επιχείρησης με την τεχνική υλοποίηση. Προσπαθώ να σκέφτομαι σε επίπεδο συστημάτων και όχι μόνο μεμονωμένων features.",
+  },
+  focus: {
+    eyebrow: "ΤΡΕΧΟΥΣΑ ΚΑΤΕΥΘΥΝΣΗ",
+    title: "Σε τι δουλεύω αυτή την περίοδο",
+    paragraphs: [
+      "Παράλληλα με την επαγγελματική μου εμπειρία, δουλεύω ενεργά πάνω σε projects για να εξελίσσω τις γνώσεις μου στο σύγχρονο frontend και στο full-stack development.",
+      "Τα projects του portfolio, όπως dashboards, API-driven εφαρμογές και interactive interfaces, έχουν δημιουργηθεί με στόχο να δοκιμάσω διαφορετικές τεχνολογίες και να προσεγγίσω πιο ρεαλιστικά σενάρια ανάπτυξης.",
+    ],
+  },
+  beyond: {
+    eyebrow: "ΠΕΡΑ ΑΠΟ ΤΟΝ ΚΩΔΙΚΑ",
+    title: "Design και οπτική επικοινωνία",
+    text: "Με ενδιαφέρει ιδιαίτερα το design και η οπτική επικοινωνία, μέσα από graphic και video design. Αυτό επηρεάζει τον τρόπο που σκέφτομαι το UI, το layout και τη συνολική εμπειρία χρήστη. Για μένα, το frontend development δεν είναι μόνο λειτουργικότητα, αλλά και η δημιουργία εμπειριών που είναι καθαρές, προσεγμένες και ευχάριστες στη χρήση.",
+  },
+  cta: {
+    eyebrow: "ΕΠΙΚΟΙΝΩΝΙΑ",
+    text: "Αυτή την περίοδο εστιάζω στο να εξελίσσομαι ως frontend engineer και να συμμετέχω σε πραγματικές εφαρμογές. Αν ψάχνετε κάποιον που συνδυάζει τεχνική σκέψη με έμφαση στο frontend και το user experience, θα χαρώ να επικοινωνήσουμε.",
+    button: "Επικοινωνία",
+  },
+}
 };
+
 
 

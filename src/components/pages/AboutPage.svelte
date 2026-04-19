@@ -74,7 +74,7 @@
           >
             <div class="about-profile-photo mb-8">
               <img
-                src={profileImage ?? "/images/profile.jpg"}
+                src={profileImage ?? "/images/profile.png"}
                 alt="Vangelis Manouhos"
                 class="absolute inset-0 h-full w-full object-cover"
               />

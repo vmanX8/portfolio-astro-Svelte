@@ -5,7 +5,6 @@
   import InView from "../ui/InView.svelte";
   import Typewriter from "../ui/Typewriter.svelte";
   import RotatingRing from "../ui/RotatingRing.svelte";
-  import { fade } from "svelte/transition";
 
   type Props = {
     locale?: Locale;
@@ -21,6 +20,18 @@
   let roleStarted = $state(false);
   let taglineStarted = $state(false);
   let showCTAs = $state(false);
+
+  function fadeTransition(
+    node: Element,
+    { duration = 400 }: { duration?: number } = {},
+  ) {
+    const opacity = Number(getComputedStyle(node).opacity);
+
+    return {
+      duration,
+      css: (t: number) => `opacity: ${t * opacity}`,
+    };
+  }
 </script>
 
 <section id="home" class="pt-28 md:pt-32" aria-labelledby="hero-title">
@@ -82,7 +93,7 @@
           </p>
 
           {#if showCTAs}
-            <div class="flex flex-wrap gap-3 pt-2" transition:fade>
+            <div class="flex flex-wrap gap-3 pt-2" transition:fadeTransition>
               <a
                 href="#projects"
                 class="rounded-full border border-[color:var(--accent-weak)] px-5 py-2.5 text-sm font-medium text-white bg-white/5 hover:bg-[color:var(--accent-weak)] focus:outline-none focus:ring-2 focus:ring-[color:var(--accent)]/60 shadow-[var(--accent-glow)] hover:shadow-[var(--accent-glow-hover)] transition-shadow duration-200"
