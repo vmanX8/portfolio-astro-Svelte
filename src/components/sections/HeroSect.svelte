@@ -36,7 +36,7 @@
 
 <section id="home" class="pt-28 md:pt-32" aria-labelledby="hero-title">
   <div class="section-shell">
-    <InView>
+    <InView initialShown>
       <div class="grid items-center gap-10 md:grid-cols-2">
         <div class="space-y-6 lg:min-h-[400px]">
           <p
