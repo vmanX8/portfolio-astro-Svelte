@@ -22,6 +22,10 @@ const items = [
   "PostgreSQL",
   "REST APIs",
   "JWT",
+  "Java",
+  "OOP",
+  "UML",
+  "SQL",
   "Git",
   "Figma",
   "Canva"
@@ -31,11 +35,11 @@ export const toolkitByLanguage: Record<Locale, Toolkit> = {
   en: {
     title: "Stack",
     items,
-    updatedAt: "2026-04-17",
+    updatedAt: "2026-05-16",
   },
   gr: {
     title: "Τεχνολογίες",
     items,
-    updatedAt: "2026-04-17",
+    updatedAt: "2026-05-16",
   },
 };
