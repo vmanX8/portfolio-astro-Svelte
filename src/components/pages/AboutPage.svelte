@@ -41,7 +41,7 @@
     ></div>
 
     <div class="section-shell">
-      <InView>
+      <InView initialShown>
         <div class="grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr]">
           <div class="space-y-6">
             <p

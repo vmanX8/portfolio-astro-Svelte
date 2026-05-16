@@ -34,11 +34,15 @@
   }
 </script>
 
-<section id="home" class="pt-28 md:pt-32" aria-labelledby="hero-title">
+<section
+  id="home"
+  class="min-h-[100svh] pt-28 md:min-h-0 md:pt-32"
+  aria-labelledby="hero-title"
+>
   <div class="section-shell">
     <InView>
       <div class="grid items-center gap-10 md:grid-cols-2">
-        <div class="space-y-6 lg:min-h-[400px]">
+        <div class="min-h-[31rem] space-y-6 sm:min-h-[28rem] md:min-h-[26rem] lg:min-h-[400px]">
           <p
             class="text-sm uppercase tracking-[0.35em] text-[color:var(--accent)]"
           >
