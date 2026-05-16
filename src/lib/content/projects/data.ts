@@ -45,4 +45,10 @@ export const projectBaseList: ProjectBase[] = [
     icon: "/assets/projects/moviedb.svg",
     repoUrl: "https://github.com/vmanX8/movie-app-learning",
   },
+  {
+    id: "hotel-service",
+    tech: ["Java", "OOP", "UML", "SQL"],
+    icon: "/assets/projects/hotel-icon.svg",
+    repoUrl: "https://github.com/vmanX8/hotel-service",
+  },
 ];

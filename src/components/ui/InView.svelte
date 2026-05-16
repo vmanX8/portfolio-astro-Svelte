@@ -12,12 +12,12 @@
 
   let {
     once = true,
-    threshold = 0.5,
-    rootMargin = "0px",
+    threshold = 0.15,
+    rootMargin = "0px 0px -10% 0px",
     children,
   }: Props = $props();
 
-  let shown = $state(false);
+  let shown = $state(true);
 
   const options = $derived({
     threshold,
