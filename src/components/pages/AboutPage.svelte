@@ -41,7 +41,7 @@
     ></div>
 
     <div class="section-shell">
-      <InView>
+      <InView initialShown>
         <div class="grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr]">
           <div class="space-y-6">
             <p
@@ -73,11 +73,23 @@
             aria-label={pageCopy.profile.summary}
           >
             <div class="about-profile-photo mb-8">
-              <img
-                src={profileImage ?? "/images/profile.png"}
-                alt="Vangelis Manouhos"
-                class="absolute inset-0 h-full w-full object-cover"
-              />
+              <picture>
+                <source
+                  type="image/webp"
+                  srcset="/images/profile-384.webp 384w, /images/profile-640.webp 640w"
+                  sizes="(min-width: 1024px) 360px, calc(100vw - 4rem)"
+                />
+                <img
+                  src={profileImage ?? "/images/profile-640.webp"}
+                  alt="Vangelis Manouhos"
+                  width="640"
+                  height="640"
+                  loading="eager"
+                  fetchpriority="high"
+                  decoding="async"
+                  class="absolute inset-0 h-full w-full object-cover"
+                />
+              </picture>
             </div>
 
             <div class="mb-8 flex items-center gap-4">

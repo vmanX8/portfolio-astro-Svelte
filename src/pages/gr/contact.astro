@@ -14,7 +14,7 @@ const pageCopy = contactCopy[lang];
 <BaseLayout title={seo.contactTitle} description={seo.contactDescription} lang={lang}>
     <NavBarShell />
     <ContactPage
-        client:load
+        client:idle
         locale={lang}
         copy={pageCopy}
         links={contactLinks}
