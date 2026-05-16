@@ -45,6 +45,13 @@ export const projectTextByLanguage: LocalizedProjectText = {
       details:
         "A full-stack movie application built to explore backend fundamentals and API-driven development. Includes user authentication with JWT, RESTful API design, and CRUD operations for managing movie data. Uses PostgreSQL for persistence and Express.js for server-side logic, with a focus on asynchronous operations and structured data handling. The backend is ready while the frontend is under development, with a React frontend repo planned to complete the full-stack showcase.",
     },
+    "hotel-service": {
+      title: "Hotel Reservation App",
+      summary:
+        "Java hotel booking app focused on clean OOP structure, reservation logic, UML, and SQL.",
+      details:
+        "A Java hotel reservation application built around clean object-oriented design and practical booking flows. It models rooms, customers, and reservations as domain entities, with a service layer for booking, cancellation, availability checks, and search operations. The app includes validation for dates, room availability, and booking conflicts, and uses enums, UUIDs, Java collections, streams, Optional, and LocalDate for safer data handling. UML diagrams and a basic SQL schema support the application structure and document the domain model.",
+    },
   },
 
 gr: {
@@ -91,6 +98,14 @@ gr: {
       "Full-stack εφαρμογή ταινιών με Node.js, Express, PostgreSQL, JWT και REST APIs.",
     details:
       "Full-stack εφαρμογή ταινιών που δημιουργήθηκε για εξάσκηση σε backend fundamentals και ανάπτυξη με APIs. Περιλαμβάνει authentication με JWT, σχεδίαση RESTful API και CRUD λειτουργίες για διαχείριση δεδομένων. Χρησιμοποιεί PostgreSQL για αποθήκευση και Express.js για server-side λογική, με έμφαση σε ασύγχρονες ροές και δομημένη διαχείριση δεδομένων. Το backend είναι ολοκληρωμένο, ενώ το frontend βρίσκεται σε εξέλιξη με στόχο την υλοποίηση σε React.",
+  },
+
+  "hotel-service": {
+    title: "Hotel Reservation App",
+    summary:
+      "Java εφαρμογή κρατήσεων ξενοδοχείου με καθαρή OOP δομή, reservation logic, UML και SQL.",
+    details:
+      "Java εφαρμογή κρατήσεων ξενοδοχείου, σχεδιασμένη γύρω από καθαρή αντικειμενοστραφή δομή και πρακτικές ροές booking. Μοντελοποιεί δωμάτια, πελάτες και κρατήσεις ως domain entities, με service layer για δημιουργία κρατήσεων, ακυρώσεις, ελέγχους διαθεσιμότητας και αναζητήσεις. Περιλαμβάνει validation για ημερομηνίες, διαθεσιμότητα δωματίων και συγκρούσεις κρατήσεων, ενώ αξιοποιεί enums, UUIDs, Java collections, streams, Optional και LocalDate για πιο ασφαλή διαχείριση δεδομένων. UML διαγράμματα και ένα βασικό SQL schema υποστηρίζουν τη δομή της εφαρμογής και τεκμηριώνουν το domain model.",
   },
 }
 };
